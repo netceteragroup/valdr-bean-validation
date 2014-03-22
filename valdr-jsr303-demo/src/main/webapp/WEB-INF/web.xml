@@ -8,6 +8,10 @@
   <servlet>
     <servlet-name>valdr JSR 303 Servlet</servlet-name>
     <servlet-class>com.netcetera.valdrjsr303.ValidationRulesServlet</servlet-class>
+    <init-param>
+      <param-name>modelPackages</param-name>
+      <param-value>com.netcetera.valdrjsr303.demo.model</param-value>
+    </init-param>
   </servlet>
 
   <servlet-mapping>
