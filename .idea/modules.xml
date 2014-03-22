@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/valdr-jsr303/valdr-jsr303.iml" filepath="$PROJECT_DIR$/valdr-jsr303/valdr-jsr303.iml" />
+      <module fileurl="file://$PROJECT_DIR$/valdr-jsr303-demo/valdr-jsr303-demo.iml" filepath="$PROJECT_DIR$/valdr-jsr303-demo/valdr-jsr303-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/valdr-jsr303-parent.iml" filepath="$PROJECT_DIR$/valdr-jsr303-parent.iml" />
+    </modules>
+  </component>
+</project>
+

@@ -1,0 +1,30 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="valdr-jsr303-demo:war exploded">
+    <output-path>$PROJECT_DIR$/valdr-jsr303-demo/target/valdr-jsr303-demo-1.0-SNAPSHOT</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="valdr-jsr303-demo/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="valdr-jsr303-demo" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="archive" name="valdr-jsr303-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="valdr-jsr303" />
+          </element>
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.6" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.7.6" />
+          <element id="library" level="project" name="Maven: org.reflections:reflections:0.9.8" />
+          <element id="library" level="project" name="Maven: com.google.guava:guava:16.0.1" />
+          <element id="library" level="project" name="Maven: javassist:javassist:3.12.1.GA" />
+          <element id="library" level="project" name="Maven: dom4j:dom4j:1.6.1" />
+          <element id="library" level="project" name="Maven: xml-apis:xml-apis:1.0.b2" />
+          <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.13" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" />
+          <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.12.6" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.3.1" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
