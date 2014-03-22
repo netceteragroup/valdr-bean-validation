@@ -27,9 +27,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ng-jsr303" target="1.7" />
       <module name="valdr-jsr303" target="1.7" />
       <module name="valdr-jsr303-demo" target="1.7" />
+      <module name="valdr-jsr303-parent" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
