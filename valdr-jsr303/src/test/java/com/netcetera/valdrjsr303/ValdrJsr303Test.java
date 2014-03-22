@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class CliValidationConfigurationParserTest {
+public class ValdrJsr303Test {
   /**
    * See method name.
    */
