@@ -4,6 +4,8 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/valdr-jsr303" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/valdr-jsr303-demo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../valdr/.gitignore" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../valdr/README.md" charset="UTF-8" />
   </component>
 </project>
 
