@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="valdr-jsr303-demo:war">
-    <output-path>$PROJECT_DIR$/valdr-jsr303-demo/target</output-path>
-    <root id="archive" name="valdr-jsr303-demo-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="valdr-jsr303-demo:war exploded" />
-    </root>
-  </artifact>
-</component>

@@ -7,7 +7,7 @@
     </list>
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/valdr-jsr303-demo" />
+    <file type="web" url="file://$PROJECT_DIR$/valdr-bean-validation-demo" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

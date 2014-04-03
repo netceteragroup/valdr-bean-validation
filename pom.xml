@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.netcetera</groupId>
-  <artifactId>valdr-jsr303-parent</artifactId>
+  <groupId>com.github.valdr</groupId>
+  <artifactId>valdr-bean-validation-parent</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <modules>
-    <module>valdr-jsr303</module>
-    <module>valdr-jsr303-demo</module>
+    <module>valdr-bean-validation</module>
+    <module>valdr-bean-validation-demo</module>
   </modules>
 
   <properties>

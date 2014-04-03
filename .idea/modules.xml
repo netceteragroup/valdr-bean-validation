@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/valdr-jsr303/valdr-jsr303.iml" filepath="$PROJECT_DIR$/valdr-jsr303/valdr-jsr303.iml" />
-      <module fileurl="file://$PROJECT_DIR$/valdr-jsr303-demo/valdr-jsr303-demo.iml" filepath="$PROJECT_DIR$/valdr-jsr303-demo/valdr-jsr303-demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/valdr-jsr303-parent.iml" filepath="$PROJECT_DIR$/valdr-jsr303-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/valdr-bean-validation/valdr-bean-validation.iml" filepath="$PROJECT_DIR$/valdr-bean-validation/valdr-bean-validation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/valdr-bean-validation-demo/valdr-bean-validation-demo.iml" filepath="$PROJECT_DIR$/valdr-bean-validation-demo/valdr-bean-validation-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/valdr-bean-validation-parent.iml" filepath="$PROJECT_DIR$/valdr-bean-validation-parent.iml" />
     </modules>
   </component>
 </project>
