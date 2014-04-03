@@ -3,10 +3,10 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
 
-  <display-name>valdr JSR 303 demo application</display-name>
+  <display-name>valdr Bean Validation demo application</display-name>
 
   <servlet>
-    <servlet-name>valdr JSR 303 Servlet</servlet-name>
+    <servlet-name>valdr Bean Validation Servlet</servlet-name>
     <servlet-class>com.netcetera.valdrjsr303.ValidationRulesServlet</servlet-class>
     <init-param>
       <param-name>modelPackages</param-name>
@@ -15,7 +15,7 @@
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>valdr JSR 303 Servlet</servlet-name>
+    <servlet-name>valdr Bean Validation Servlet</servlet-name>
     <url-pattern>/validationRules</url-pattern>
   </servlet-mapping>
 </web-app>
