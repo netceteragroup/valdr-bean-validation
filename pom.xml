@@ -8,6 +8,24 @@
   <artifactId>valdr-bean-validation-parent</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+  <url>https://github.com/netceteragroup/valdr-bean-validation</url>
+  <inceptionYear>2014</inceptionYear>
+  <description>Bean Validation (JSR 303/349) plugin for valdr, the new AngularJS Model Validatior.</description>
+
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>https://buildhive.cloudbees.com/job/netceteragroup/job/valdr-bean-validation/</url>
+  </ciManagement>
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/netceteragroup/valdr-bean-validation/issues</url>
+  </issueManagement>
+  <scm>
+    <url>https://github.com/netceteragroup/valdr-bean-validation</url>
+    <connection>scm:git:ssh://git@github.com/netceteragroup/valdr-bean-validation.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/netceteragroup/valdr-bean-validation.git</developerConnection>
+  </scm>
+
   <modules>
     <module>valdr-bean-validation</module>
     <module>valdr-bean-validation-demo</module>
