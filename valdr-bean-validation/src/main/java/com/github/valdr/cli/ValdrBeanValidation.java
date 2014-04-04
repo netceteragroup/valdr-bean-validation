@@ -5,6 +5,7 @@ import com.github.valdr.ValidationConfigurationParser;
 import org.apache.commons.cli.*;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -20,7 +21,8 @@ import java.util.List;
  *  -c <arg>   comma-separated list of fully qualified class names of custom
  *             JSR 303 annotations
  *  -o <arg>   output file to which the validation meta-model (JSON) is
- *             written, if omitted the output is sent to system out
+ *             written creating missing folders automatically, if omitted the
+ *             output is sent to system out
  *  -p <arg>   comma-separated list of fully qualified names of packages in
  *             which you keep JSR 303 annotated model classes
  * </pre>
@@ -86,7 +88,9 @@ public class ValdrBeanValidation {
     if (StringUtils.isEmpty(outputFile)) {
       System.out.println(output);
     } else {
-      try (Writer writer = new FileWriter(outputFile)) {
+      File file = new File(outputFile);
+      file.getParentFile().mkdirs();
+      try (Writer writer = new FileWriter(file)) {
         writer.write(output);
       }
     }
