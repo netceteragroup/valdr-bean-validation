@@ -2,7 +2,7 @@ valdr-bean-validation [![Build Status](https://buildhive.cloudbees.com/job/netce
 ============
 
 [JSR 303](http://beanvalidation.org/) (Bean Validation) plugin for [valdr](https://github.com/netceteragroup/valdr),
-the new AngularJS Model Validatior.
+the new AngularJS Model Validator.
 
 ## Install
 
