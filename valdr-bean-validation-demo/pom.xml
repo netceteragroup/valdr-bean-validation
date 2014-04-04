@@ -12,6 +12,10 @@
   <artifactId>valdr-bean-validation-demo</artifactId>
   <packaging>war</packaging>
 
+  <properties>
+    <exec-maven-plugin.version>1.2.1</exec-maven-plugin.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.github.valdr</groupId>
@@ -19,4 +23,34 @@
       <version>${project.version}</version>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>${exec-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>process-bean-validation-annotations</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>com.github.valdr.cli.ValdrBeanValidation</mainClass>
+          <arguments>
+            <argument>-p</argument>
+            <argument>com.github.valdr.demo.model</argument>
+            <argument>-o</argument>
+            <!--rules.json is written to target/valdr-bean-validation-demo-<version>
+                i.e. it'll be in the root folder of the final WAR file -->
+            <argument>${project.build.directory}/${project.build.finalName}/rules.json</argument>
+          </arguments>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
