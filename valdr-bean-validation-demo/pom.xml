@@ -31,7 +31,7 @@
         <executions>
           <execution>
             <id>process-bean-validation-annotations</id>
-            <phase>process-sources</phase>
+            <phase>process-classes</phase>
             <goals>
               <goal>java</goal>
             </goals>
