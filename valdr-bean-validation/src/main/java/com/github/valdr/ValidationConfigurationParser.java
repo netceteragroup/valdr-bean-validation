@@ -6,7 +6,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.github.valdr.util.AnnotationUtils;
+import com.github.valdr.thirdparty.spring.AnnotationUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.reflections.ReflectionUtils;
