@@ -1,4 +1,8 @@
 language: java
 jdk:
-  - oraclejdk7
-  - openjdk7
+- oraclejdk7
+- openjdk7
+after_success:
+- mvn -pl :valdr-bean-validation clean test jacoco:report coveralls:jacoco
+env:
+  secure: LAJs6O7Nyc3+8u5IhjEjZ5Jh1GBK91XQ1f/NMNhjQEH9hdo91YJKqPq07QAIqjERIZDiFg2z4yoBmEVlg3AAeiX8SRt+JZ81wgf3OZ2ZP4SJ6OBtDpe4Inv670fCLn167ktWZUI03oypCOck5B0MHafrg1ty9okbO2Br84UzYvc=
