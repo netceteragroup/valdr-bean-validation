@@ -45,8 +45,8 @@
   </distributionManagement>
 
   <ciManagement>
-    <system>Jenkins</system>
-    <url>https://buildhive.cloudbees.com/job/netceteragroup/job/valdr-bean-validation/</url>
+    <system>Travis CI</system>
+    <url>https://travis-ci.org/netceteragroup/valdr-bean-validation</url>
   </ciManagement>
   <issueManagement>
     <system>github</system>
