@@ -14,8 +14,8 @@ import java.util.List;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class ValidationConfigurationParserTest {
-  private ValidationConfigurationParser parser;
+public class ValidationRulesParserTest {
+  private ValidationRulesParser parser;
 
   /**
    * See method name.
@@ -23,7 +23,7 @@ public class ValidationConfigurationParserTest {
   @Test
   public void shouldReturnEmptyJsonObjectWhenNoClassIsFound() {
     // given
-    parserConfiguredFor(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+    parserConfiguredFor(emptyStringList(), emptyStringList());
     // when
     String json = parser.parse();
     // then
@@ -36,7 +36,7 @@ public class ValidationConfigurationParserTest {
   @Test
   public void shouldReturnDefaultMessage() {
     // given
-    parserConfiguredFor(Lists.newArrayList(TestModelWithASingleAnnotatedMember.class.getPackage().getName()), Collections.EMPTY_LIST);
+    parserConfiguredFor(Lists.newArrayList(TestModelWithASingleAnnotatedMember.class.getPackage().getName()), emptyStringList());
     // when
     String json = parser.parse();
     // then
@@ -58,7 +58,7 @@ public class ValidationConfigurationParserTest {
   @Test
   public void shouldReturnCustomMessage() {
     // given
-    parserConfiguredFor(Lists.newArrayList(TestModelWithASingleAnnotatedMemberWithCustomMessageKey.class.getPackage().getName()), Collections.EMPTY_LIST);
+    parserConfiguredFor(Lists.newArrayList(TestModelWithASingleAnnotatedMemberWithCustomMessageKey.class.getPackage().getName()), emptyStringList());
     // when
     String json = parser.parse();
     // then
@@ -80,7 +80,7 @@ public class ValidationConfigurationParserTest {
   @Test
   public void shouldIgnoreNotConfiguredCustomValidators() {
     // given
-    parserConfiguredFor(Lists.newArrayList(TestModelWithCustomValidator.class.getPackage().getName()), Collections.EMPTY_LIST);
+    parserConfiguredFor(Lists.newArrayList(TestModelWithCustomValidator.class.getPackage().getName()), emptyStringList());
     // when
     String json = parser.parse();
     // then
@@ -93,7 +93,7 @@ public class ValidationConfigurationParserTest {
   @Test
   public void shouldConsiderSuperClassMembers() {
     // given
-    parserConfiguredFor(Lists.newArrayList(SubClassWithNoValidatedMembers.class.getPackage().getName()), Collections.EMPTY_LIST);
+    parserConfiguredFor(Lists.newArrayList(SubClassWithNoValidatedMembers.class.getPackage().getName()), emptyStringList());
     // when
     String json = parser.parse();
     // then
@@ -117,6 +117,10 @@ public class ValidationConfigurationParserTest {
   }
 
   private void parserConfiguredFor(List<String> modelPackageNames, List<String> customValidatorClassNames) {
-    parser = new ValidationConfigurationParser(new ParserConfiguration(modelPackageNames, customValidatorClassNames));
+    parser = new ValidationRulesParser(new ParserConfiguration(modelPackageNames, customValidatorClassNames));
+  }
+
+  private List<String> emptyStringList(){
+    return Collections.emptyList();
   }
 }

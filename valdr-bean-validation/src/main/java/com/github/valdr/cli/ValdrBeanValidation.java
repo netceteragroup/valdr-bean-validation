@@ -1,7 +1,7 @@
 package com.github.valdr.cli;
 
 import com.github.valdr.ParserConfiguration;
-import com.github.valdr.ValidationConfigurationParser;
+import com.github.valdr.ValidationRulesParser;
 import org.apache.commons.cli.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,7 +38,7 @@ public class ValdrBeanValidation {
       String outputFile = cli.getOptionValue("o");
 
       ParserConfiguration parserConfiguration = new ParserConfiguration(modelPackages, customValidatorClassNames);
-      ValidationConfigurationParser parser = new ValidationConfigurationParser(parserConfiguration);
+      ValidationRulesParser parser = new ValidationRulesParser(parserConfiguration);
       try {
         output(parser, outputFile);
       } catch (IOException e) {
@@ -83,7 +83,7 @@ public class ValdrBeanValidation {
     return options;
   }
 
-  private static void output(ValidationConfigurationParser parser, String outputFile) throws IOException {
+  private static void output(ValidationRulesParser parser, String outputFile) throws IOException {
     String output = parser.parse();
     if (StringUtils.isEmpty(outputFile)) {
       System.out.println(output);

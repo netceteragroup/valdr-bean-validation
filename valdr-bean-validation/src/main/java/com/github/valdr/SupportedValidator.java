@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
 
-public enum SupportedValidators {
+public enum SupportedValidator {
 
   Required(NotNull.class), Min(Min.class), Max(Max.class), Size(Size.class), Digits(Digits.class),
   Pattern(Pattern.class), Future(Future.class), Past(Past.class);
@@ -16,22 +16,22 @@ public enum SupportedValidators {
   @Getter
   private final Class<? extends Annotation> beanValidationAnnotation;
 
-  private SupportedValidators(Class<? extends Annotation> beanValidationAnnotation) {
+  private SupportedValidator(Class<? extends Annotation> beanValidationAnnotation) {
     this.beanValidationAnnotation = beanValidationAnnotation;
   }
 
   public static Iterable<Class<? extends Annotation>> getAllBeanValidationAnnotations() {
-    return Iterables.transform(Arrays.asList(values()), new Function<SupportedValidators, Class<? extends Annotation>>() {
+    return Iterables.transform(Arrays.asList(values()), new Function<SupportedValidator, Class<? extends Annotation>>() {
 
       @Override
-      public Class<? extends Annotation> apply(SupportedValidators input) {
+      public Class<? extends Annotation> apply(SupportedValidator input) {
         return input.getBeanValidationAnnotation();
       }
     });
   }
 
-  public static SupportedValidators valueOfAnnotationClassOrNull(Class<? extends Annotation> beanValidationAnnotation) {
-    for (SupportedValidators supportedValidator : values()) {
+  public static SupportedValidator valueOfAnnotationClassOrNull(Class<? extends Annotation> beanValidationAnnotation) {
+    for (SupportedValidator supportedValidator : values()) {
       if (supportedValidator.getBeanValidationAnnotation().equals(beanValidationAnnotation)) {
         return supportedValidator;
       }

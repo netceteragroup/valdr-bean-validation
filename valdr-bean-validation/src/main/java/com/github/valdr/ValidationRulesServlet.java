@@ -28,7 +28,7 @@ public class ValidationRulesServlet extends HttpServlet {
   private String corsAllowOriginPattern;
   private String invalidConfigurationMessage;
   private ParserConfiguration parserConfiguration;
-  private ValidationConfigurationParser parser;
+  private ValidationRulesParser parser;
 
   @Override
   public void init() throws ServletException {
@@ -39,7 +39,7 @@ public class ValidationRulesServlet extends HttpServlet {
       logger.info("The Servlet appears to be correctly configured.");
       parserConfiguration = buildParserConfiguration();
       corsAllowOriginPattern = getCorsAllowOriginPattern();
-      parser = new ValidationConfigurationParser(parserConfiguration);
+      parser = new ValidationRulesParser(parserConfiguration);
     }
   }
 
