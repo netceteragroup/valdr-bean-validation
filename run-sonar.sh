@@ -1,6 +1,6 @@
 #!/bin/bash
 
-replacement='<properties><sonar.infostore.skipDependencies>true</sonar.infostore.skipDependencies><sonar.infostore.skip>true</sonar.infostore.skip><sonar.exclusions>com/github/valdr/demo/**/*,com/github/valdr/thirdparty/**/*,</sonar.exclusions>'
+replacement='<properties><sonar.infostore.skipDependencies>true</sonar.infostore.skipDependencies><sonar.infostore.skip>true</sonar.infostore.skip><sonar.exclusions>src/main/java/com/github/valdr/demo/**/*,src/main/java/com/github/valdr/thirdparty/**/*</sonar.exclusions>'
 
 sed -i .bak "s#<properties>#$replacement#" pom.xml
 
