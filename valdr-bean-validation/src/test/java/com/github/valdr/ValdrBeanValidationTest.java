@@ -14,6 +14,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class ValdrBeanValidationTest {
+  private static final String LS = System.getProperty("line.separator");
+
   /**
    * See method name.
    */
@@ -65,7 +67,7 @@ public class ValdrBeanValidationTest {
 
     // then
     String sysOutContent = sysOutSlurper.deactivate();
-    assertThat(sysOutContent, is("{ }\n"));
+    assertThat(sysOutContent, is("{ }" + LS));
   }
 
   /**

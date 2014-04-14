@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class ValidationRulesParserTest {
+  private static final String LS = System.getProperty("line.separator");
   private ValidationRulesParser parser;
 
   /**
@@ -40,14 +41,14 @@ public class ValidationRulesParserTest {
     // when
     String json = parser.parse();
     // then
-    String expected = "{\n" +
-      "  \"" + TestModelWithASingleAnnotatedMember.class.getSimpleName() + "\" : {\n" +
-      "    \"notNullString\" : {\n" +
-      "      \"Required\" : {\n" +
-      "        \"message\" : \"{javax.validation.constraints.NotNull.message}\"\n" +
-      "      }\n" +
-      "    }\n" +
-      "  }\n" +
+    String expected = "{" + LS +
+      "  \"" + TestModelWithASingleAnnotatedMember.class.getSimpleName() + "\" : {" + LS +
+      "    \"notNullString\" : {" + LS +
+      "      \"Required\" : {" + LS +
+      "        \"message\" : \"{javax.validation.constraints.NotNull.message}\"" + LS +
+      "      }" + LS +
+      "    }" + LS +
+      "  }" + LS +
       "}";
     assertThat(json, is(expected));
   }
@@ -62,14 +63,14 @@ public class ValidationRulesParserTest {
     // when
     String json = parser.parse();
     // then
-    String expected = "{\n" +
-      "  \"" + TestModelWithASingleAnnotatedMemberWithCustomMessageKey.class.getSimpleName() + "\" : {\n" +
-      "    \"notNullString\" : {\n" +
-      "      \"Required\" : {\n" +
-      "        \"message\" : \"paul\"\n" +
-      "      }\n" +
-      "    }\n" +
-      "  }\n" +
+    String expected = "{" + LS +
+      "  \"" + TestModelWithASingleAnnotatedMemberWithCustomMessageKey.class.getSimpleName() + "\" : {" + LS +
+      "    \"notNullString\" : {" + LS +
+      "      \"Required\" : {" + LS +
+      "        \"message\" : \"paul\"" + LS +
+      "      }" + LS +
+      "    }" + LS +
+      "  }" + LS +
       "}";
     assertThat(json, is(expected));
   }
@@ -97,21 +98,21 @@ public class ValidationRulesParserTest {
     // when
     String json = parser.parse();
     // then
-    String expected = "{\n" +
-      "  \"" + SuperClassWithValidatedMember.class.getSimpleName() + "\" : {\n" +
-      "    \"notNullString\" : {\n" +
-      "      \"Required\" : {\n" +
-      "        \"message\" : \"{javax.validation.constraints.NotNull.message}\"\n" +
-      "      }\n" +
-      "    }\n" +
-      "  },\n" +
-      "  \"" + SubClassWithNoValidatedMembers.class.getSimpleName() + "\" : {\n" +
-      "    \"notNullString\" : {\n" +
-      "      \"Required\" : {\n" +
-      "        \"message\" : \"{javax.validation.constraints.NotNull.message}\"\n" +
-      "      }\n" +
-      "    }\n" +
-      "  }\n" +
+    String expected = "{" + LS +
+      "  \"" + SuperClassWithValidatedMember.class.getSimpleName() + "\" : {" + LS +
+      "    \"notNullString\" : {" + LS +
+      "      \"Required\" : {" + LS +
+      "        \"message\" : \"{javax.validation.constraints.NotNull.message}\"" + LS +
+      "      }" + LS +
+      "    }" + LS +
+      "  }," + LS +
+      "  \"" + SubClassWithNoValidatedMembers.class.getSimpleName() + "\" : {" + LS +
+      "    \"notNullString\" : {" + LS +
+      "      \"Required\" : {" + LS +
+      "        \"message\" : \"{javax.validation.constraints.NotNull.message}\"" + LS +
+      "      }" + LS +
+      "    }" + LS +
+      "  }" + LS +
       "}";
     assertThat(json, is(expected));
   }
