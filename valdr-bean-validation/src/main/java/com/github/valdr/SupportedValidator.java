@@ -25,6 +25,9 @@ public enum SupportedValidator {
 
       @Override
       public Class<? extends Annotation> apply(SupportedValidator input) {
+        if (input == null) {
+          throw new NullPointerException("Passed validator must not be null.");
+        }
         return input.getBeanValidationAnnotation();
       }
     });
