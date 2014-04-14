@@ -2,12 +2,17 @@ package com.github.valdr.cli;
 
 import com.github.valdr.ParserConfiguration;
 import com.github.valdr.ValidationRulesParser;
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,16 +23,20 @@ import java.util.List;
  * follows:
  * <pre >
  * java ValdrBeanValidation [-c <arg>] [-o <arg>] -p <arg>
- *  -c <arg>   comma-separated list of fully qualified class names of custom
- *             JSR 303 annotations
- *  -o <arg>   output file to which the validation meta-model (JSON) is
- *             written creating missing folders automatically, if omitted the
- *             output is sent to system out
- *  -p <arg>   comma-separated list of fully qualified names of packages in
- *             which you keep JSR 303 annotated model classes
+ * -c <arg>   comma-separated list of fully qualified class names of custom
+ * JSR 303 annotations
+ * -o <arg>   output file to which the validation meta-model (JSON) is
+ * written creating missing folders automatically, if omitted the
+ * output is sent to system out
+ * -p <arg>   comma-separated list of fully qualified names of packages in
+ * which you keep JSR 303 annotated model classes
  * </pre>
  */
-public class ValdrBeanValidation {
+public final class ValdrBeanValidation {
+
+  private ValdrBeanValidation() {
+    // utility class
+  }
 
   public static void main(String[] args) {
     Options cliOptions = createCliOptions();
@@ -72,14 +81,14 @@ public class ValdrBeanValidation {
 
   private static Options createCliOptions() {
     Options options = new Options();
-    Option packageNameOption = new Option("p", true, "comma-separated list of fully qualified names of packages " +
-      "in which you keep JSR 303 annotated model classes");
+    Option packageNameOption = new Option("p", true, "comma-separated list of fully qualified names of packages "
+      + "in which you keep JSR 303 annotated model classes");
     packageNameOption.setRequired(true);
     options.addOption(packageNameOption);
-    options.addOption("c", true, "comma-separated list of fully qualified class names of custom JSR 303 " +
-      "annotations");
-    options.addOption("o", true, "output file to which the validation meta-model (JSON) is written, " +
-      "" + "if omitted the output is sent to system out");
+    options.addOption("c", true,
+      "comma-separated list of fully qualified class names of custom JSR 303 " + "annotations");
+    options.addOption("o", true, "output file to which the validation meta-model (JSON) is written, "
+      + "if omitted the output is sent to system out");
     return options;
   }
 
@@ -90,7 +99,7 @@ public class ValdrBeanValidation {
     } else {
       File file = new File(outputFile);
       file.getParentFile().mkdirs();
-      try (Writer writer = new FileWriter(file)) {
+      try (Writer writer = new OutputStreamWriter(new FileOutputStream(file), "utf-8")) {
         writer.write(output);
       }
     }

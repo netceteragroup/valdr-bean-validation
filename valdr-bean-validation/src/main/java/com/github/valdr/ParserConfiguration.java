@@ -6,6 +6,6 @@ import java.util.List;
 
 @Value
 public class ParserConfiguration {
-  List<String> modelPackageNames;
-  List<String> customValidatorClassNames;
+  private List<String> modelPackageNames;
+  private List<String> customValidatorClassNames;
 }

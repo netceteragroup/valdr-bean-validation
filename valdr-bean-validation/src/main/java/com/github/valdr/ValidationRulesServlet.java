@@ -21,8 +21,8 @@ public class ValidationRulesServlet extends HttpServlet {
   private static final String CUSTOM_VALIDATORS_CONFIG_PARAM = "customValidatorClassNames";
   private static final String CORS_PATTERN_CONFIG_PARAM = "corsAllowOriginPattern";
   private final String invalidConfigurationMessageIntro = "The Servlet is not configured correctly. ";
-  private final String packageConfigurationMissingMessage = "The '" + MODEL_PACKAGES_CONFIG_PARAM + "' parameter in " +
-    "web.xml is missing.";
+  private final String packageConfigurationMissingMessage =
+    "The '" + MODEL_PACKAGES_CONFIG_PARAM + "' parameter in web.xml is missing.";
   private final Logger logger = LoggerFactory.getLogger(ValidationRulesServlet.class);
   private boolean correctlyConfigured = false;
   private String corsAllowOriginPattern;

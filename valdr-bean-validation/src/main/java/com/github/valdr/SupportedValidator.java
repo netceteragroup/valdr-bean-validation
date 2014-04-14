@@ -4,7 +4,14 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import lombok.Getter;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
 
@@ -21,7 +28,8 @@ public enum SupportedValidator {
   }
 
   public static Iterable<Class<? extends Annotation>> getAllBeanValidationAnnotations() {
-    return Iterables.transform(Arrays.asList(values()), new Function<SupportedValidator, Class<? extends Annotation>>() {
+    return Iterables.transform(Arrays.asList(values()), new Function<SupportedValidator,
+      Class<? extends Annotation>>() {
 
       @Override
       public Class<? extends Annotation> apply(SupportedValidator input) {

@@ -65,8 +65,8 @@ public class ValidationRulesParser {
   }
 
   private Set<Class<?>> findClassesToParse() {
-    Reflections reflections = new Reflections(new ConfigurationBuilder().setUrls(buildClassLoaderUrls()).setScanners
-      (new SubTypesScanner(false)).filterInputsBy(buildPackagePredicates()));
+    Reflections reflections = new Reflections(new ConfigurationBuilder().
+      setUrls(buildClassLoaderUrls()).setScanners(new SubTypesScanner(false)).filterInputsBy(buildPackagePredicates()));
 
     return reflections.getSubTypesOf(Object.class);
   }
