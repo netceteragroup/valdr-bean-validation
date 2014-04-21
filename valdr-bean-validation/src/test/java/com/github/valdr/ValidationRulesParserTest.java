@@ -6,6 +6,7 @@ import com.github.valdr.model.b.TestModelWithCustomValidator;
 import com.github.valdr.model.c.TestModelWithASingleAnnotatedMemberWithCustomMessageKey;
 import com.github.valdr.model.d.SubClassWithNoValidatedMembers;
 import com.github.valdr.model.d.SuperClassWithValidatedMember;
+import org.hibernate.validator.constraints.Email;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -79,13 +80,38 @@ public class ValidationRulesParserTest {
    * See method name.
    */
   @Test
-  public void shouldIgnoreNotConfiguredCustomValidators() {
+  public void shouldIgnoreNotConfiguredCustomAnnotations() {
     // given
     parserConfiguredFor(Lists.newArrayList(TestModelWithCustomValidator.class.getPackage().getName()), emptyStringList());
     // when
     String json = parser.parse();
     // then
     assertThat(json, is("{ }"));
+  }
+
+  /**
+   * See method name.
+   */
+  @Test
+  public void shouldProcessConfiguredCustomAnnotation() {
+    // given
+    parserConfiguredFor(Lists.newArrayList(TestModelWithCustomValidator.class.getPackage().getName()),
+      Lists.newArrayList(Email.class.getName()));
+    // when
+    String json = parser.parse();
+    // then
+    String expected = "{" + LS +
+      "  \"TestModelWithCustomValidator\" : {" + LS +
+      "    \"email\" : {" + LS +
+      "      \"org.hibernate.validator.constraints.Email\" : {" + LS +
+      "        \"message\" : \"{org.hibernate.validator.constraints.Email.message}\"," + LS +
+      "        \"flags\" : [ ]," + LS +
+      "        \"regexp\" : \".*\"" + LS +
+      "      }" + LS +
+      "    }" + LS +
+      "  }" + LS +
+      "}";
+    assertThat(json, is(expected));
   }
 
   /**
@@ -117,8 +143,8 @@ public class ValidationRulesParserTest {
     assertThat(json, is(expected));
   }
 
-  private void parserConfiguredFor(List<String> modelPackageNames, List<String> customValidatorClassNames) {
-    parser = new ValidationRulesParser(new ParserConfiguration(modelPackageNames, customValidatorClassNames));
+  private void parserConfiguredFor(List<String> modelPackageNames, List<String> customAnnotationClassNames) {
+    parser = new ValidationRulesParser(new ParserConfiguration(modelPackageNames, customAnnotationClassNames));
   }
 
   private List<String> emptyStringList(){

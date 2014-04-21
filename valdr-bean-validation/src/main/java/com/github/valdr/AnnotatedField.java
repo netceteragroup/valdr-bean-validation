@@ -12,7 +12,6 @@ import java.lang.reflect.Field;
  * based on those annotations.
  */
 public class AnnotatedField {
-  private final Logger logger = LoggerFactory.getLogger(AnnotatedField.class);
   private final Field field;
   private final Iterable<Class<? extends Annotation>> relevantAnnotationClasses;
 
@@ -42,9 +41,9 @@ public class AnnotatedField {
         SupportedValidator supportedValidator = SupportedValidator.valueOfAnnotationClassOrNull(annotation
           .annotationType());
         if (supportedValidator == null) {
-          logger.warn("No supported validator found for '{}', ignoring.", annotation.annotationType());
+          validationRules.put(annotation.annotationType().getName(), annotationAttributes);
         } else {
-          validationRules.put(supportedValidator, annotationAttributes);
+          validationRules.put(supportedValidator.name(), annotationAttributes);
         }
       }
     }

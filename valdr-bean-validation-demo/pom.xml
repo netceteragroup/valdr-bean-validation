@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.github.valdr</groupId>
@@ -19,6 +20,10 @@
       <groupId>com.github.valdr</groupId>
       <artifactId>valdr-bean-validation</artifactId>
       <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
     </dependency>
   </dependencies>
 
@@ -42,6 +47,8 @@
           <arguments>
             <argument>-p</argument>
             <argument>com.github.valdr.demo.model</argument>
+            <argument>-c</argument>
+            <argument>org.hibernate.validator.constraints.Email</argument>
             <argument>-o</argument>
             <!--rules.json is written to target/valdr-bean-validation-demo-<version>
                 i.e. it'll be in the root folder of the final WAR file -->
