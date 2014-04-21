@@ -14,6 +14,10 @@
       <param-value>com.github.valdr.demo.model</param-value>
     </init-param>
     <init-param>
+      <param-name>customAnnotationClassNames</param-name>
+      <param-value>org.hibernate.validator.constraints.Email</param-value>
+    </init-param>
+    <init-param>
       <param-name>corsAllowOriginPattern</param-name>
       <param-value>*</param-value>
     </init-param>
