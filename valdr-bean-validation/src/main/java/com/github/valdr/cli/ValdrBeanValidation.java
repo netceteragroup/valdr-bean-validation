@@ -19,17 +19,17 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Command line client to print the bean validation JSON model to system out or a defined output file. Usage is as
+ * Command line client to print the Bean Validation JSON model to system out or a defined output file. Usage is as
  * follows:
- * <pre >
+ * <pre>
  * java ValdrBeanValidation [-c <arg>] [-o <arg>] -p <arg>
  * -c <arg>   comma-separated list of fully qualified class names of custom
- * JSR 303 annotations
+ * Bean Validation annotations
  * -o <arg>   output file to which the validation meta-model (JSON) is
  * written creating missing folders automatically, if omitted the
  * output is sent to system out
  * -p <arg>   comma-separated list of fully qualified names of packages in
- * which you keep JSR 303 annotated model classes
+ * which you keep Bean Validation annotated model classes
  * </pre>
  */
 public final class ValdrBeanValidation {
@@ -38,6 +38,11 @@ public final class ValdrBeanValidation {
     // utility class
   }
 
+  /**
+   * See class comment.
+   *
+   * @param args cli arguments
+   */
   public static void main(String[] args) {
     Options cliOptions = createCliOptions();
     try {

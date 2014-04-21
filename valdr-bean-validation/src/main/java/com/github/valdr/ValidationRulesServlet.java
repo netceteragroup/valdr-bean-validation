@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ValidationRulesServlet extends HttpServlet {
   private static final String MODEL_PACKAGES_CONFIG_PARAM = "modelPackages";
-  private static final String CUSTOM_VALIDATORS_CONFIG_PARAM = "customValidatorClassNames";
+  private static final String CUSTOM_ANNOTATIONS_CONFIG_PARAM = "customAnnotationClassNames";
   private static final String CORS_PATTERN_CONFIG_PARAM = "corsAllowOriginPattern";
   private final String invalidConfigurationMessageIntro = "The Servlet is not configured correctly. ";
   private final String packageConfigurationMissingMessage =
@@ -66,8 +66,8 @@ public class ValidationRulesServlet extends HttpServlet {
 
   private ParserConfiguration buildParserConfiguration() {
     List<String> modelPackageNames = getServletConfigAsList(MODEL_PACKAGES_CONFIG_PARAM);
-    List<String> customValidatorClassNames = getServletConfigAsList(CUSTOM_VALIDATORS_CONFIG_PARAM);
-    ParserConfiguration config = new ParserConfiguration(modelPackageNames, customValidatorClassNames);
+    List<String> customAnnotationClassNames = getServletConfigAsList(CUSTOM_ANNOTATIONS_CONFIG_PARAM);
+    ParserConfiguration config = new ParserConfiguration(modelPackageNames, customAnnotationClassNames);
     logger.info("Built parser configuration '{}' based on configuration in web.xml.", config);
     return config;
   }
