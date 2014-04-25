@@ -3,6 +3,7 @@ package com.github.valdr;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import lombok.Getter;
+import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Future;
@@ -17,14 +18,23 @@ import java.util.Arrays;
 
 public enum SupportedValidator {
 
-  Required(NotNull.class), Min(Min.class), Max(Max.class), Size(Size.class), Digits(Digits.class),
-  Pattern(Pattern.class), Future(Future.class), Past(Past.class);
+  REQUIRED("required", NotNull.class), MIN("min", Min.class), MAX("max", Max.class), SIZE("size", Size.class),
+  DIGITS("digits", Digits.class), PATTERN("pattern", Pattern.class), FUTURE("future", Future.class), PAST("past",
+    Past.class), EMAIL("hibernateEmail", Email.class), URL("hibernateUrl", org.hibernate.validator.constraints.URL
+    .class);
 
   @Getter
   private final Class<? extends Annotation> beanValidationAnnotation;
+  private final String camelCaseName;
 
-  private SupportedValidator(Class<? extends Annotation> beanValidationAnnotation) {
+  private SupportedValidator(String camelCaseName, Class<? extends Annotation> beanValidationAnnotation) {
+    this.camelCaseName = camelCaseName;
     this.beanValidationAnnotation = beanValidationAnnotation;
+  }
+
+  @Override
+  public String toString() {
+    return camelCaseName;
   }
 
   public static Iterable<Class<? extends Annotation>> getAllBeanValidationAnnotations() {

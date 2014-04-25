@@ -41,7 +41,7 @@ public class AnnotatedField {
         if (supportedValidator == null) {
           validationRules.put(annotation.annotationType().getName(), annotationAttributes);
         } else {
-          validationRules.put(supportedValidator.name(), annotationAttributes);
+          validationRules.put(supportedValidator.toString(), annotationAttributes);
         }
       }
     }

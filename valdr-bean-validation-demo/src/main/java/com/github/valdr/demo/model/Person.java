@@ -1,6 +1,7 @@
 package com.github.valdr.demo.model;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,4 +13,6 @@ public class Person {
   private String lastName;
   @Email
   private String email;
+  @URL
+  private String url;
 }
