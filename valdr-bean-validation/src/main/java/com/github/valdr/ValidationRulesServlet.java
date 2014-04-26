@@ -16,18 +16,30 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Produces JSON validation rules on the fly parsing model classes in your classpath. Servlet can/must be configured
+ * using three {@link javax.servlet.ServletConfig} parameters (* = mandatory):
+ * <ul>
+ * <li>modelPackages*: comma-separated list of package names such as "com.company.foo,com.company.bar"</li>
+ * <li>customAnnotationClassNames: comma-separated list of custom validator annotation class names,
+ * by default only the ones from {@link SupportedValidator} are processed</li>
+ * <li>corsAllowOriginPattern: in case this Servlet is deployed under a different domain than the valdr client
+ * you can use <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> to access this
+ * resource</li>
+ * </ul>
+ * <p/>
+ * Upon each request the configured model packages in the classpath are parsed for classes containing supported or
+ * custom Bean Validation annotations. The Servlet then builds and returns a JSON document with all validation rules
+ * (i.e. Bean Validation constraints). The JSON document adheres to structure specified by valdr.
+ */
 public class ValidationRulesServlet extends HttpServlet {
   private static final String MODEL_PACKAGES_CONFIG_PARAM = "modelPackages";
   private static final String CUSTOM_ANNOTATIONS_CONFIG_PARAM = "customAnnotationClassNames";
   private static final String CORS_PATTERN_CONFIG_PARAM = "corsAllowOriginPattern";
-  private final String invalidConfigurationMessageIntro = "The Servlet is not configured correctly. ";
-  private final String packageConfigurationMissingMessage =
-    "The '" + MODEL_PACKAGES_CONFIG_PARAM + "' parameter in web.xml is missing.";
   private final Logger logger = LoggerFactory.getLogger(ValidationRulesServlet.class);
   private boolean correctlyConfigured = false;
   private String corsAllowOriginPattern;
   private String invalidConfigurationMessage;
-  private ParserConfiguration parserConfiguration;
   private ValidationRulesParser parser;
 
   @Override
@@ -37,9 +49,8 @@ public class ValidationRulesServlet extends HttpServlet {
     if (StringUtils.isEmpty(invalidConfigurationMessage)) {
       correctlyConfigured = true;
       logger.info("The Servlet appears to be correctly configured.");
-      parserConfiguration = buildParserConfiguration();
       corsAllowOriginPattern = getCorsAllowOriginPattern();
-      parser = new ValidationRulesParser(parserConfiguration);
+      parser = new ValidationRulesParser(buildParserConfiguration());
     }
   }
 
@@ -74,13 +85,22 @@ public class ValidationRulesServlet extends HttpServlet {
 
   private String checkConfiguration() {
     if (getServletConfig() == null) {
-      logger.error("ServletConfig is null.");
-      return buildConfigurationErrorMessage(invalidConfigurationMessage);
+      return handleServletContextNull();
     } else if (StringUtils.isEmpty(getServletConfig().getInitParameter(MODEL_PACKAGES_CONFIG_PARAM))) {
-      logger.error("'{}' parameter missing in web.xml.", MODEL_PACKAGES_CONFIG_PARAM);
-      return buildConfigurationErrorMessage(invalidConfigurationMessageIntro, packageConfigurationMissingMessage);
+      return handleModelPackagesNotConfigured();
     }
     return StringUtils.EMPTY;
+  }
+
+  private String handleServletContextNull() {
+    logger.error("ServletConfig is null.");
+    return buildConfigurationErrorMessage(invalidConfigurationMessage);
+  }
+
+  private String handleModelPackagesNotConfigured() {
+    logger.error("'{}' parameter missing in web.xml.", MODEL_PACKAGES_CONFIG_PARAM);
+    return buildConfigurationErrorMessage("The Servlet is not configured correctly. ",
+      "The '" + MODEL_PACKAGES_CONFIG_PARAM + "' parameter in web.xml is missing.");
   }
 
   private String buildConfigurationErrorMessage(String... messages) {
