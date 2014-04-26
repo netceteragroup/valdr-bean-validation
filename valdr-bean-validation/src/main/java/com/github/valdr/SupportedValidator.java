@@ -16,12 +16,19 @@ import javax.validation.constraints.Size;
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
 
+/**
+ * All validators currently supported by valdr Bean Validation. Each value represents a validator that valdr provides
+ * an implementation for (JavaScript). The {@code toString()} method is guaranteed to return the validator name as
+ * expected by valdr.
+ */
 public enum SupportedValidator {
 
+  // CHECKSTYLE:OFF
   REQUIRED("required", NotNull.class), MIN("min", Min.class), MAX("max", Max.class), SIZE("size", Size.class),
   DIGITS("digits", Digits.class), PATTERN("pattern", Pattern.class), FUTURE("future", Future.class), PAST("past",
     Past.class), EMAIL("hibernateEmail", Email.class), URL("hibernateUrl", org.hibernate.validator.constraints.URL
     .class);
+  // CHECKSTYLE:ON
 
   @Getter
   private final Class<? extends Annotation> beanValidationAnnotation;
@@ -37,6 +44,11 @@ public enum SupportedValidator {
     return camelCaseName;
   }
 
+  /**
+   * Iterates over all the enum values and collects their annotation class member.
+   *
+   * @return all collected annotation classes
+   */
   public static Iterable<Class<? extends Annotation>> getAllBeanValidationAnnotations() {
     return Iterables.transform(Arrays.asList(values()), new Function<SupportedValidator,
       Class<? extends Annotation>>() {
@@ -51,6 +63,12 @@ public enum SupportedValidator {
     });
   }
 
+  /**
+   * Finds enum value whose annotation class member matches the method argument.
+   *
+   * @param beanValidationAnnotation annotation class
+   * @return enum value matching the passed annotation or null
+   */
   public static SupportedValidator valueOfAnnotationClassOrNull(Class<? extends Annotation> beanValidationAnnotation) {
     for (SupportedValidator supportedValidator : values()) {
       if (supportedValidator.getBeanValidationAnnotation().equals(beanValidationAnnotation)) {
