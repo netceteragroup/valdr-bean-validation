@@ -5,6 +5,7 @@ import com.github.valdr.model.b.TestModelWithCustomValidator;
 import com.github.valdr.model.c.TestModelWithASingleAnnotatedMemberWithCustomMessageKey;
 import com.github.valdr.model.d.SubClassWithNoValidatedMembers;
 import com.github.valdr.model.d.SuperClassWithValidatedMember;
+import com.github.valdr.model.e.TestModelClassWithLotsOfIrrelevantAnnotations;
 import com.github.valdr.model.f.TestModelWithHibernateEmailAnnotation;
 import com.github.valdr.model.g.TestModelWithHibernateUrlAnnotation;
 import com.github.valdr.model.validation.CustomValidation;
@@ -86,6 +87,19 @@ public class ValidationRulesParserTest {
   public void shouldIgnoreNotConfiguredCustomAnnotations() {
     // given
     parserConfiguredFor(Lists.newArrayList(TestModelWithCustomValidator.class.getPackage().getName()), emptyStringList());
+    // when
+    String json = parser.parse();
+    // then
+    assertThat(json, is("{ }"));
+  }
+
+  /**
+   * See method name.
+   */
+  @Test
+  public void shouldIgnoreNotSupportedAnnotations() {
+    // given
+    parserConfiguredFor(Lists.newArrayList(TestModelClassWithLotsOfIrrelevantAnnotations.class.getPackage().getName()), emptyStringList());
     // when
     String json = parser.parse();
     // then
