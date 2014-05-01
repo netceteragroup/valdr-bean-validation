@@ -22,7 +22,7 @@ import java.util.List;
  * <ul>
  * <li>modelPackages*: comma-separated list of package names such as "com.company.foo,com.company.bar"</li>
  * <li>customAnnotationClassNames: comma-separated list of custom validator annotation class names,
- * by default only the ones from {@link SupportedValidator} are processed</li>
+ * by default only the ones from {@link BuiltInConstraint} are processed</li>
  * <li>corsAllowOriginPattern: in case this Servlet is deployed under a different domain than the valdr client
  * you can use <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> to access this
  * resource</li>
@@ -40,7 +40,7 @@ public class ValidationRulesServlet extends HttpServlet {
   private boolean correctlyConfigured = false;
   private String corsAllowOriginPattern;
   private String invalidConfigurationMessage;
-  private ValidationRulesParser parser;
+  private ConstraintParser parser;
 
   @Override
   public void init() throws ServletException {
@@ -50,7 +50,7 @@ public class ValidationRulesServlet extends HttpServlet {
       correctlyConfigured = true;
       logger.info("The Servlet appears to be correctly configured.");
       corsAllowOriginPattern = getCorsAllowOriginPattern();
-      parser = new ValidationRulesParser(buildParserConfiguration());
+      parser = new ConstraintParser(buildParserConfiguration());
     }
   }
 

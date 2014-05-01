@@ -8,11 +8,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-public class ValidationRuleAttributes implements AttributeMap {
+public class ConstraintAttributes implements AttributeMap {
 
   private final Map<String, Object> map = new HashMap<>();
 
-  public ValidationRuleAttributes(Annotation annotation) {
+  public ConstraintAttributes(Annotation annotation) {
     Map<String, Object> annotationAttributes = AnnotationUtils.getAnnotationAttributes(annotation);
     removeUnusedAttributes(annotationAttributes);
     map.putAll(annotationAttributes);

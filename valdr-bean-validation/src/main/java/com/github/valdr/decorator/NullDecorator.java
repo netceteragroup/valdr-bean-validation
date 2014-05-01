@@ -1,6 +1,6 @@
 package com.github.valdr.decorator;
 
-import com.github.valdr.ValidationRuleAttributes;
+import com.github.valdr.ConstraintAttributes;
 
 import java.util.Map;
 import java.util.Set;
@@ -8,9 +8,9 @@ import java.util.Set;
 /**
  * Do-nothing implementation.
  */
-public class NullDecorator extends AbstractValidationRuleAttributesDecorator {
+public class NullDecorator extends AbstractConstraintAttributesDecorator {
   // CHECKSTYLE:OFF
-  public NullDecorator(ValidationRuleAttributes decoratee) {
+  public NullDecorator(ConstraintAttributes decoratee) {
     super(decoratee);
   }
 

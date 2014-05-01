@@ -21,9 +21,9 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
 
-public class ValidationRulesParserTest {
+public class ConstraintParserTest {
   private static final String LS = System.getProperty("line.separator");
-  private ValidationRulesParser parser;
+  private ConstraintParser parser;
 
   /**
    * See method name.
@@ -216,7 +216,7 @@ public class ValidationRulesParserTest {
   }
 
   private void parserConfiguredFor(List<String> modelPackageNames, List<String> customAnnotationClassNames) {
-    parser = new ValidationRulesParser(new ParserConfiguration(modelPackageNames, customAnnotationClassNames));
+    parser = new ConstraintParser(new ParserConfiguration(modelPackageNames, customAnnotationClassNames));
   }
 
   private List<String> emptyStringList(){

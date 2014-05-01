@@ -6,7 +6,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 /**
- * Decorator around a field with Bean Validation (and possibly other) annotations. Allows to extract validation rules
+ * Wrapper around a field with Bean Validation (and possibly other) annotations. Allows to extract validation rules
  * based on those annotations.
  */
 public class AnnotatedField {
@@ -14,7 +14,7 @@ public class AnnotatedField {
   private final Iterable<Class<? extends Annotation>> relevantAnnotationClasses;
 
   /**
-   * @param field                     decorated field
+   * @param field                     wrapped field
    * @param relevantAnnotationClasses only these annotation classes are considered when {@link
    *                                  AnnotatedField#extractValidationRules()} is invoked
    */
@@ -29,14 +29,14 @@ public class AnnotatedField {
    * @return validation rules (one per annotation)
    * @see AnnotatedField(Class, Iterable)
    */
-  FieldValidationRules extractValidationRules() {
+  FieldConstraints extractValidationRules() {
     Annotation[] annotations = field.getAnnotations();
-    FieldValidationRules validationRules = new FieldValidationRules();
+    FieldConstraints validationRules = new FieldConstraints();
 
     for (Annotation annotation : annotations) {
       if (Iterables.contains(relevantAnnotationClasses, annotation.annotationType())) {
-        ValidationRuleAttributes annotationAttributes = new ValidationRuleAttributes(annotation);
-        SupportedValidator supportedValidator = SupportedValidator.valueOfAnnotationClassOrNull(annotation
+        ConstraintAttributes annotationAttributes = new ConstraintAttributes(annotation);
+        BuiltInConstraint supportedValidator = BuiltInConstraint.valueOfAnnotationClassOrNull(annotation
           .annotationType());
         if (supportedValidator == null) {
           validationRules.put(annotation.annotationType().getName(), annotationAttributes);

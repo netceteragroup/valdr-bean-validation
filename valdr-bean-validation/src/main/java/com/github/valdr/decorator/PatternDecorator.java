@@ -1,6 +1,6 @@
 package com.github.valdr.decorator;
 
-import com.github.valdr.ValidationRuleAttributes;
+import com.github.valdr.ConstraintAttributes;
 
 import java.util.Map;
 import java.util.Set;
@@ -8,15 +8,15 @@ import java.util.Set;
 /**
  * Decorates the map of attributes of the {@link javax.validation.constraints.Pattern} constraint.
  */
-public class PatternDecorator extends AbstractValidationRuleAttributesDecorator {
+public class PatternDecorator extends AbstractConstraintAttributesDecorator {
 
-  public PatternDecorator(ValidationRuleAttributes decoratee) {
+  public PatternDecorator(ConstraintAttributes decoratee) {
     super(decoratee);
   }
 
   /**
    * Modifies the original entry set such that the value for the 'regexp' attribute is a JavaScript regexp pattern.
-   * The following two transformations are applied:
+   * The following transformations are applied:
    * <ul>
    * <li>adding '/' prefix and suffix turning a Java pattern like "abc" into "/abc/" for JavaScript</li>
    * </ul>

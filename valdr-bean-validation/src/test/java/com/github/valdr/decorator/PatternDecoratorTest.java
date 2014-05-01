@@ -1,6 +1,6 @@
 package com.github.valdr.decorator;
 
-import com.github.valdr.ValidationRuleAttributes;
+import com.github.valdr.ConstraintAttributes;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.mock;
  */
 public class PatternDecoratorTest {
 
-  private ValidationRuleAttributes constraintAttributes;
+  private ConstraintAttributes constraintAttributes;
 
   /**
    * See method name.
@@ -54,7 +54,7 @@ public class PatternDecoratorTest {
   private void regexPattern(String regexPattern) {
     Map<String, Object> attributes = new HashMap<>();
     attributes.put("regexp", regexPattern);
-    constraintAttributes = mock(ValidationRuleAttributes.class);
+    constraintAttributes = mock(ConstraintAttributes.class);
     given(constraintAttributes.entrySet()).willReturn(attributes.entrySet());
   }
 }

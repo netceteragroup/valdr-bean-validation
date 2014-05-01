@@ -29,11 +29,11 @@ import java.util.Set;
  * annotations ({@code javax.validation.*}) and configured custom annotations. The parsing result is a
  * JSON string that complies with the document specified by <a href="https://github.com/netceteragroup/valdr">valdr</a>.
  *
- * @see SupportedValidator
+ * @see BuiltInConstraint
  * @see ParserConfiguration
  */
-public class ValidationRulesParser {
-  private final Logger logger = LoggerFactory.getLogger(ValidationRulesParser.class);
+public class ConstraintParser {
+  private final Logger logger = LoggerFactory.getLogger(ConstraintParser.class);
 
   private final ParserConfiguration parserConfiguration;
   private final Iterable<Class<? extends Annotation>> allRelevantAnnotationClasses;
@@ -43,23 +43,23 @@ public class ValidationRulesParser {
    *
    * @param parserConfiguration the only relevant input for the parser is this configuration
    */
-  public ValidationRulesParser(ParserConfiguration parserConfiguration) {
+  public ConstraintParser(ParserConfiguration parserConfiguration) {
     this.parserConfiguration = parserConfiguration;
-    allRelevantAnnotationClasses = Iterables.concat(SupportedValidator.getAllBeanValidationAnnotations(),
+    allRelevantAnnotationClasses = Iterables.concat(BuiltInConstraint.getAllBeanValidationAnnotations(),
       getConfiguredCustomAnnotations());
   }
 
   /**
-   * Based on the configuration passed to the constructor model classes are parsed for validation rules.
+   * Based on the configuration passed to the constructor model classes are parsed for constraints.
    *
    * @return JSON string for <a href="https://github.com/netceteragroup/valdr">valdr</a>
    */
   public String parse() {
-    Map<String, ClassValidationRules> classNameToValidationRulesMap = new HashMap<>();
+    Map<String, ClassConstraints> classNameToValidationRulesMap = new HashMap<>();
 
     for (Class clazz : findClassesToParse()) {
       if (clazz != null) {
-        ClassValidationRules classValidationRules = new AnnotatedClass(clazz,
+        ClassConstraints classValidationRules = new AnnotatedClass(clazz,
           allRelevantAnnotationClasses).extractValidationRules();
         if (classValidationRules.size() > 0) {
           classNameToValidationRulesMap.put(clazz.getSimpleName(), classValidationRules);
@@ -70,7 +70,7 @@ public class ValidationRulesParser {
     return toJson(classNameToValidationRulesMap);
   }
 
-  private String toJson(Map<String, ClassValidationRules> classNameToValidationRulesMap) {
+  private String toJson(Map<String, ClassConstraints> classNameToValidationRulesMap) {
     ObjectMapper objectMapper = new ObjectMapper();
 
     SimpleModule module = new SimpleModule();
