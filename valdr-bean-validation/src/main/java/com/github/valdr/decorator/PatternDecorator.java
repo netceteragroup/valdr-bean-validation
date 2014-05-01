@@ -10,6 +10,11 @@ import java.util.Set;
  */
 public class PatternDecorator extends AbstractConstraintAttributesDecorator {
 
+  /**
+   * Constructor that accepts the decoratee which is wrapped by this decorator.
+   *
+   * @param decoratee wrapped {@link ConstraintAttributes}
+   */
   public PatternDecorator(ConstraintAttributes decoratee) {
     super(decoratee);
   }
@@ -27,7 +32,7 @@ public class PatternDecorator extends AbstractConstraintAttributesDecorator {
   public Set<Map.Entry<String, Object>> entrySet() {
     Set<Map.Entry<String, Object>> entrySet = getDecoratee().entrySet();
     for (Map.Entry<String, Object> entry : entrySet) {
-      if (entry.getKey() == "regexp") {
+      if ("regexp".equals(entry.getKey())) {
         entry.setValue(javaToJavaScriptRegexpPattern(entry));
       }
     }

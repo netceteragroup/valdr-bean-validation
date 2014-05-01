@@ -8,10 +8,18 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * All attributes of a constraint (i.e. Bean Validation annotation attributes).
+ */
 public class ConstraintAttributes implements AttributeMap {
 
   private final Map<String, Object> map = new HashMap<>();
 
+  /**
+   * Constructor.
+   *
+   * @param annotation annotation which is queried for attributes
+   */
   public ConstraintAttributes(Annotation annotation) {
     Map<String, Object> annotationAttributes = AnnotationUtils.getAnnotationAttributes(annotation);
     removeUnusedAttributes(annotationAttributes);
