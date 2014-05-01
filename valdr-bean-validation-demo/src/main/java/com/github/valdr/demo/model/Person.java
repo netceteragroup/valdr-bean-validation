@@ -4,10 +4,11 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class Person {
-  @NotNull
+  @NotNull(message = "\\foo")
   private String firstName;
   @Size(min = 4, max = 31)
   private String lastName;
@@ -15,4 +16,10 @@ public class Person {
   private String email;
   @URL
   private String url;
+  @Pattern(regexp = "abc")
+  private String addSlashPrefixSuffix;
+  @Pattern(regexp = "\\abc\\.") // \a matches the bell character ;-)
+  private String withBackslashes;
+  @Pattern(regexp = "\\\\abc\\.")
+  private String withMoreBackslashes;
 }

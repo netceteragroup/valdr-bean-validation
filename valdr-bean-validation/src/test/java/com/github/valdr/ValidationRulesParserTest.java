@@ -8,6 +8,7 @@ import com.github.valdr.model.d.SuperClassWithValidatedMember;
 import com.github.valdr.model.e.TestModelClassWithLotsOfIrrelevantAnnotations;
 import com.github.valdr.model.f.TestModelWithHibernateEmailAnnotation;
 import com.github.valdr.model.g.TestModelWithHibernateUrlAnnotation;
+import com.github.valdr.model.h.TestModelWithPatterns;
 import com.github.valdr.model.validation.CustomValidation;
 import com.google.common.collect.Lists;
 import org.junit.Test;
@@ -15,6 +16,7 @@ import org.junit.Test;
 import java.util.Collections;
 import java.util.List;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
@@ -196,6 +198,21 @@ public class ValidationRulesParserTest {
       "  }" + LS +
       "}";
     assertThat(json, is(expected));
+  }
+
+  /**
+   * See method name.
+   */
+  @Test
+  public void shouldDecoratePatternConstraint() {
+    // given
+    parserConfiguredFor(Lists.newArrayList(TestModelWithPatterns.class.getPackage().getName()), emptyStringList());
+    // when
+    String json = parser.parse();
+    // then
+    assertThat(json, containsString("/abc/"));
+    assertThat(json, containsString("/\\\\abc\\\\./")); // JSON needs to escape \ -> double escape here
+    assertThat(json, containsString("/\\\\\\\\abc\\\\./")); // JSON needs to escape \ -> double escape here
   }
 
   private void parserConfiguredFor(List<String> modelPackageNames, List<String> customAnnotationClassNames) {

@@ -1,5 +1,8 @@
 package com.github.valdr;
 
+import com.github.valdr.decorator.AbstractValidationRuleAttributesDecorator;
+import com.github.valdr.decorator.NullDecorator;
+import com.github.valdr.decorator.PatternDecorator;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import lombok.Getter;
@@ -25,23 +28,44 @@ public enum SupportedValidator {
 
   // CHECKSTYLE:OFF
   REQUIRED("required", NotNull.class), MIN("min", Min.class), MAX("max", Max.class), SIZE("size", Size.class),
-  DIGITS("digits", Digits.class), PATTERN("pattern", Pattern.class), FUTURE("future", Future.class), PAST("past",
-    Past.class), EMAIL("hibernateEmail", Email.class), URL("hibernateUrl", org.hibernate.validator.constraints.URL
-    .class);
+  DIGITS("digits", Digits.class), PATTERN("pattern", Pattern.class, PatternDecorator.class), FUTURE("future",
+    Future.class), PAST("past", Past.class), EMAIL("hibernateEmail", Email.class), URL("hibernateUrl",
+    org.hibernate.validator.constraints.URL.class);
   // CHECKSTYLE:ON
 
   @Getter
   private final Class<? extends Annotation> beanValidationAnnotation;
+  private final Class<? extends AbstractValidationRuleAttributesDecorator> decorator;
   private final String camelCaseName;
 
   private SupportedValidator(String camelCaseName, Class<? extends Annotation> beanValidationAnnotation) {
+    this(camelCaseName, beanValidationAnnotation, NullDecorator.class);
+  }
+
+  private SupportedValidator(String camelCaseName, Class<? extends Annotation> beanValidationAnnotation,
+                             Class<? extends AbstractValidationRuleAttributesDecorator> decorator) {
     this.camelCaseName = camelCaseName;
+    this.decorator = decorator;
     this.beanValidationAnnotation = beanValidationAnnotation;
   }
 
   @Override
   public String toString() {
     return camelCaseName;
+  }
+
+  /**
+   * Wraps a decorator of this constraint around the constraint attributes and returns it.
+   *
+   * @param attributes the attributes to decorate
+   * @return decorator
+   */
+  public AbstractValidationRuleAttributesDecorator createDecoratorFor(ValidationRuleAttributes attributes) {
+    try {
+      return decorator.getConstructor(ValidationRuleAttributes.class).newInstance(attributes);
+    } catch (Exception e) {
+      throw new IllegalStateException(e);
+    }
   }
 
   /**

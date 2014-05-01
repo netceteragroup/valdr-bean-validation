@@ -2,6 +2,8 @@ package com.github.valdr;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.github.valdr.serializer.AttributeMapSerializer;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -69,7 +71,13 @@ public class ValidationRulesParser {
   }
 
   private String toJson(Map<String, ClassValidationRules> classNameToValidationRulesMap) {
-    ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+    ObjectMapper objectMapper = new ObjectMapper();
+
+    SimpleModule module = new SimpleModule();
+    module.addSerializer(AttributeMap.class, new AttributeMapSerializer());
+    objectMapper.registerModule(module);
+
+    ObjectWriter ow = objectMapper.writer().withDefaultPrettyPrinter();
     try {
       return ow.writeValueAsString(classNameToValidationRulesMap);
     } catch (IOException e) {

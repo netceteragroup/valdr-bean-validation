@@ -6,13 +6,21 @@ import java.lang.annotation.Annotation;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
-public class ValidationRuleAttributes extends HashMap<String, Object> {
+public class ValidationRuleAttributes implements AttributeMap {
 
-  ValidationRuleAttributes(Annotation annotation) {
+  private final Map<String, Object> map = new HashMap<>();
+
+  public ValidationRuleAttributes(Annotation annotation) {
     Map<String, Object> annotationAttributes = AnnotationUtils.getAnnotationAttributes(annotation);
     removeUnusedAttributes(annotationAttributes);
-    putAll(annotationAttributes);
+    map.putAll(annotationAttributes);
+  }
+
+  @Override
+  public Set<Map.Entry<String, Object>> entrySet() {
+    return map.entrySet();
   }
 
   private void removeUnusedAttributes(Map<String, Object> annotationAttributes) {
