@@ -3,7 +3,7 @@ package com.github.valdr.serializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.github.valdr.AttributeMap;
+import com.github.valdr.MinimalMap;
 import lombok.Value;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,18 +17,18 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Tests {@link AttributeMapSerializer}.
+ * Tests {@link MinimalMapSerializer}.
  */
-public class AttributeMapSerializerTest {
+public class MinimalMapSerializerTest {
   private static final String LS = System.getProperty("line.separator");
-  private TestAttributeMap attributeMap;
+  private TestMinimalMap attributeMap;
 
   /**
    * Initializes the map.
    */
   @Before
   public void setup() {
-    attributeMap = new TestAttributeMap();
+    attributeMap = new TestMinimalMap();
   }
 
   /**
@@ -74,7 +74,7 @@ public class AttributeMapSerializerTest {
     ObjectMapper objectMapper = new ObjectMapper();
 
     SimpleModule module = new SimpleModule();
-    module.addSerializer(AttributeMap.class, new AttributeMapSerializer());
+    module.addSerializer(MinimalMap.class, new MinimalMapSerializer());
     objectMapper.registerModule(module);
 
     ObjectWriter ow = objectMapper.writer().withDefaultPrettyPrinter();
@@ -90,13 +90,23 @@ public class AttributeMapSerializerTest {
     private final String string;
   }
 
-  private static final class TestAttributeMap implements AttributeMap {
+  private static final class TestMinimalMap implements MinimalMap<Object> {
 
     private final Map<String, Object> map = new LinkedHashMap<>(4);
 
     @Override
     public Set<Map.Entry<String, Object>> entrySet() {
       return map.entrySet();
+    }
+
+    @Override
+    public int size() {
+      return map.size();
+    }
+
+    @Override
+    public Object put(String key, Object value) {
+      return map.put(key, value);
     }
   }
 }

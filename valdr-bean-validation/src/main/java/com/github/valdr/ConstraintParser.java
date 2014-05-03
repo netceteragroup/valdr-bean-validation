@@ -3,7 +3,7 @@ package com.github.valdr;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.github.valdr.serializer.AttributeMapSerializer;
+import com.github.valdr.serializer.MinimalMapSerializer;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -74,7 +74,7 @@ public class ConstraintParser {
     ObjectMapper objectMapper = new ObjectMapper();
 
     SimpleModule module = new SimpleModule();
-    module.addSerializer(AttributeMap.class, new AttributeMapSerializer());
+    module.addSerializer(MinimalMap.class, new MinimalMapSerializer());
     objectMapper.registerModule(module);
 
     ObjectWriter ow = objectMapper.writer().withDefaultPrettyPrinter();

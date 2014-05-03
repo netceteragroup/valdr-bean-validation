@@ -31,22 +31,22 @@ public class AnnotatedField {
    */
   FieldConstraints extractValidationRules() {
     Annotation[] annotations = field.getAnnotations();
-    FieldConstraints validationRules = new FieldConstraints();
+    FieldConstraints fieldConstraints = new FieldConstraints();
 
     for (Annotation annotation : annotations) {
       if (Iterables.contains(relevantAnnotationClasses, annotation.annotationType())) {
-        ConstraintAttributes annotationAttributes = new ConstraintAttributes(annotation);
+        ConstraintAttributes constraintAttributes = new ConstraintAttributes(annotation);
         BuiltInConstraint supportedValidator = BuiltInConstraint.valueOfAnnotationClassOrNull(annotation
           .annotationType());
         if (supportedValidator == null) {
-          validationRules.put(annotation.annotationType().getName(), annotationAttributes);
+          fieldConstraints.put(annotation.annotationType().getName(), constraintAttributes);
         } else {
-          validationRules.put(supportedValidator.toString(),
-            supportedValidator.createDecoratorFor(annotationAttributes));
+          fieldConstraints.put(supportedValidator.toString(),
+            supportedValidator.createDecoratorFor(constraintAttributes));
         }
       }
     }
 
-    return validationRules;
+    return fieldConstraints;
   }
 }

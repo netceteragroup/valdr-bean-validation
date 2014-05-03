@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * All attributes of a constraint (i.e. Bean Validation annotation attributes).
  */
-public class ConstraintAttributes implements AttributeMap {
+public class ConstraintAttributes implements MinimalObjectMap {
 
   private final Map<String, Object> map = new HashMap<>();
 
@@ -29,6 +29,16 @@ public class ConstraintAttributes implements AttributeMap {
   @Override
   public Set<Map.Entry<String, Object>> entrySet() {
     return map.entrySet();
+  }
+
+  @Override
+  public int size() {
+    return map.size();
+  }
+
+  @Override
+  public Object put(String key, Object value) {
+    return map.put(key, value);
   }
 
   private void removeUnusedAttributes(Map<String, Object> annotationAttributes) {
