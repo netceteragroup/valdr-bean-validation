@@ -51,7 +51,7 @@
             <argument>-p</argument>
             <argument>com.github.valdr.demo.model</argument>
             <argument>-c</argument>
-            <argument>org.hibernate.validator.constraints.Email</argument>
+            <argument>org.hibernate.validator.constraints.CreditCardNumber</argument>
             <argument>-o</argument>
             <!--rules.json is written to target/valdr-bean-validation-demo-<version>
                 i.e. it'll be in the root folder of the final WAR file -->

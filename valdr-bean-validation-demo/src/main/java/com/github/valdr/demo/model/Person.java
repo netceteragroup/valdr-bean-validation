@@ -1,6 +1,6 @@
 package com.github.valdr.demo.model;
 
-import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotNull;
@@ -12,8 +12,8 @@ public class Person {
   private String firstName;
   @Size(min = 4, max = 31)
   private String lastName;
-  @Email
-  private String email;
+  @CreditCardNumber
+  private String creditCardNumber;
   @URL
   private String url;
   @Pattern(regexp = "abc")
