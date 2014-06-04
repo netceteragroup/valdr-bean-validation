@@ -110,7 +110,7 @@ public final class ValdrBeanValidation {
     }
   }
 
-  private static final Splitter CLI_OPTION_SPLITTER = Splitter.on(',').trimResults().omitEmptyStrings();
+  private static final Splitter CLI_OPTION_SPLITTER = Splitter.on(',').omitEmptyStrings();
     
   private static List<String> toList(String commaSeparatedArg) {
     if (StringUtils.isEmpty(commaSeparatedArg)) {
