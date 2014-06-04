@@ -2,6 +2,7 @@ package com.github.valdr.cli;
 
 import com.github.valdr.ParserConfiguration;
 import com.github.valdr.ConstraintParser;
+import com.google.common.base.Splitter;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
@@ -14,7 +15,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -110,11 +110,13 @@ public final class ValdrBeanValidation {
     }
   }
 
+  private static final Splitter CLI_OPTION_SPLITTER = Splitter.on(',').trimResults().omitEmptyStrings();
+    
   private static List<String> toList(String commaSeparatedArg) {
     if (StringUtils.isEmpty(commaSeparatedArg)) {
       return Collections.emptyList();
     } else {
-      return Arrays.asList(StringUtils.split(commaSeparatedArg, ','));
+      return CLI_OPTION_SPLITTER.splitToList(commaSeparatedArg);
     }
   }
 }
