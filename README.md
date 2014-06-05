@@ -7,7 +7,7 @@ the new AngularJS Model Validator.
 
 valdr Bean Validation parses Java model classes for Bean Validation constraints (aka JSR 303 annotations)
 and extracts their information into a [JSON document to be used by valdr](https://github.com/netceteragroup/valdr#constraints-json). This allows to apply the exact same
-validation rules on server and on the AngularJS client.
+validation rules on the server and on the AngularJS client.
 
 ## Features
 
