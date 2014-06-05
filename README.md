@@ -52,7 +52,7 @@ Example of Maven integration:
           <argument>-c</argument>
           <argument>org.hibernate.validator.constraints.CreditCardNumber</argument>
           <argument>-o</argument>
-          <!--rules.json is written to target/valdr-bean-validation-demo-<version>
+          <!--rules.json is written to target/<war-module-name>-<version>
               i.e. it'll be in the root folder of the final WAR file -->
           <argument>${project.build.directory}/${project.build.finalName}/rules.json</argument>
         </arguments>
