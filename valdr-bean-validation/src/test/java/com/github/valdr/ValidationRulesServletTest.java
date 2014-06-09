@@ -7,13 +7,13 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.mock;
 
@@ -34,16 +34,17 @@ public class ValidationRulesServletTest {
    * See method name.
    */
   @Test
-  public void shouldLookForConfigFileInClasspathIfNotConfiguredExplicitly() throws ServletException {
+  public void shouldThrowExceptionIfNoConfigFileExists  () throws ServletException {
     // given
     given(servletConfig.getInitParameter("configFile")).willReturn("");
 
     // when
-    servlet.init(servletConfig);
-
-    // then
-    assertThat(ReflectionTestUtils.getField(servlet, "correctlyConfigured").toString(), is("true"));
-    assertThat(ReflectionTestUtils.getField(servlet, "corsAllowOriginPattern").toString(), is("*"));
+    try {
+      servlet.init(servletConfig);
+      fail("Should throw IllegalArgumentException if no config file exists.");
+    } catch (IllegalArgumentException e) {
+      // expected
+    }
   }
 
   /**
