@@ -216,7 +216,10 @@ public class ConstraintParserTest {
   }
 
   private void parserConfiguredFor(List<String> modelPackageNames, List<String> customAnnotationClassNames) {
-    parser = new ConstraintParser(new ParserConfiguration(modelPackageNames, customAnnotationClassNames));
+    Options options = new Options();
+    options.setModelPackageNames(modelPackageNames);
+    options.setCustomAnnotationClassNames(customAnnotationClassNames);
+    parser = new ConstraintParser(options);
   }
 
   private List<String> emptyStringList(){

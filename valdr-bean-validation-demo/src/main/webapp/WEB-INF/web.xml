@@ -9,18 +9,6 @@
   <servlet>
     <servlet-name>valdr Bean Validation Servlet</servlet-name>
     <servlet-class>com.github.valdr.ValidationRulesServlet</servlet-class>
-    <init-param>
-      <param-name>modelPackages</param-name>
-      <param-value>com.github.valdr.demo.model</param-value>
-    </init-param>
-    <init-param>
-      <param-name>customAnnotationClassNames</param-name>
-      <param-value>org.hibernate.validator.constraints.CreditCardNumber</param-value>
-    </init-param>
-    <init-param>
-      <param-name>corsAllowOriginPattern</param-name>
-      <param-value>*</param-value>
-    </init-param>
   </servlet>
 
   <servlet-mapping>

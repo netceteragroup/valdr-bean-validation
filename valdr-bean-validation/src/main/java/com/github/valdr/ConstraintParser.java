@@ -30,12 +30,12 @@ import java.util.Set;
  * JSON string that complies with the document specified by <a href="https://github.com/netceteragroup/valdr">valdr</a>.
  *
  * @see BuiltInConstraint
- * @see ParserConfiguration
+ * @see Options
  */
 public class ConstraintParser {
   private final Logger logger = LoggerFactory.getLogger(ConstraintParser.class);
 
-  private final ParserConfiguration parserConfiguration;
+  private final Options parserConfiguration;
   private final Iterable<Class<? extends Annotation>> allRelevantAnnotationClasses;
 
   /**
@@ -43,7 +43,7 @@ public class ConstraintParser {
    *
    * @param parserConfiguration the only relevant input for the parser is this configuration
    */
-  public ConstraintParser(ParserConfiguration parserConfiguration) {
+  public ConstraintParser(Options parserConfiguration) {
     this.parserConfiguration = parserConfiguration;
     allRelevantAnnotationClasses = Iterables.concat(BuiltInConstraint.getAllBeanValidationAnnotations(),
       getConfiguredCustomAnnotations());

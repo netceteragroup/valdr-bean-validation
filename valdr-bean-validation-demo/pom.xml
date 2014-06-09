@@ -31,6 +31,12 @@
   </dependencies>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -47,16 +53,6 @@
         </executions>
         <configuration>
           <mainClass>com.github.valdr.cli.ValdrBeanValidation</mainClass>
-          <arguments>
-            <argument>-p</argument>
-            <argument>com.github.valdr.demo.model</argument>
-            <argument>-c</argument>
-            <argument>org.hibernate.validator.constraints.CreditCardNumber</argument>
-            <argument>-o</argument>
-            <!--rules.json is written to target/valdr-bean-validation-demo-<version>
-                i.e. it'll be in the root folder of the final WAR file -->
-            <argument>${project.build.directory}/${project.build.finalName}/rules.json</argument>
-          </arguments>
         </configuration>
       </plugin>
     </plugins>

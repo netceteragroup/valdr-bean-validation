@@ -1,36 +1,32 @@
 package com.github.valdr.cli;
 
-import com.github.valdr.ParserConfiguration;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.valdr.ConstraintParser;
-import com.google.common.base.Splitter;
+import com.github.valdr.Options;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Command line client to print the Bean Validation JSON model to system out or a defined output file. Usage is as
  * follows:
  * <pre>
- * java ValdrBeanValidation [-c <arg>] [-o <arg>] -p <arg>
- * -c <arg>   comma-separated list of fully qualified class names of custom
- * Bean Validation annotations
- * -o <arg>   output file to which the validation meta-model (JSON) is
- * written creating missing folders automatically, if omitted the
- * output is sent to system out
- * -p <arg>   comma-separated list of fully qualified names of packages in
- * which you keep Bean Validation annotated model classes
+ * java ValdrBeanValidation [-cf <arg>]
+ *   -cf <arg>   path to JSON configuration file, if omitted valdr-bean-validation.json is expected at root of class
+ *   path
  * </pre>
+ *
+ * @see Options
  */
 public final class ValdrBeanValidation {
 
@@ -44,17 +40,14 @@ public final class ValdrBeanValidation {
    * @param args cli arguments
    */
   public static void main(String[] args) {
-    Options cliOptions = createCliOptions();
+    org.apache.commons.cli.Options cliOptions = createCliOptions();
     try {
       CommandLine cli = parseCli(args, cliOptions);
-      List<String> modelPackages = toList(cli.getOptionValue("p"));
-      List<String> customValidatorClassNames = toList(cli.getOptionValue("c"));
-      String outputFile = cli.getOptionValue("o");
-
-      ParserConfiguration parserConfiguration = new ParserConfiguration(modelPackages, customValidatorClassNames);
-      ConstraintParser parser = new ConstraintParser(parserConfiguration);
+      Options options = loadOptions(cli);
+      validate(options);
+      ConstraintParser parser = new ConstraintParser(options);
       try {
-        output(parser, outputFile);
+        output(parser, options.getOutputFile());
       } catch (IOException e) {
         throw new RuntimeException(e);
       }
@@ -64,13 +57,39 @@ public final class ValdrBeanValidation {
     }
   }
 
-  private static void printErrorWithUsageAndHelp(Options cliOptions) {
+  private static Options loadOptions(CommandLine cli) {
+    InputStream inputStream;
+    String configFile = cli.getOptionValue("cf");
+
+    try {
+      if (StringUtils.isEmpty(configFile)) {
+        inputStream = ValdrBeanValidation.class.getResourceAsStream("/" + Options.CONFIG_FILE_NAME);
+        System.out.println(
+          "Building parser configuration from default file path. Looking for '/" + Options.CONFIG_FILE_NAME
+            + "' in classpath.");
+      } else {
+        System.out.println("Building parser configuration from configured file path '" + configFile + "'.");
+        inputStream = new FileInputStream(new File(configFile));
+      }
+      return new ObjectMapper().readValue(inputStream, Options.class);
+    } catch (IOException e) {
+      throw new IllegalArgumentException("Cannot read config file.", e);
+    }
+  }
+
+  private static void validate(Options options) {
+    options.validate();
+    System.out.println("Provided configuration validated: ok.");
+  }
+
+  private static void printErrorWithUsageAndHelp(org.apache.commons.cli.Options cliOptions) {
     System.out.println("Error. Not all mandatory args provided.");
     HelpFormatter formatter = new HelpFormatter();
     formatter.printHelp("java " + ValdrBeanValidation.class.getSimpleName(), cliOptions, true);
   }
 
-  private static CommandLine parseCli(String[] args, Options options) throws IncompleteCliException {
+  private static CommandLine parseCli(String[] args, org.apache.commons.cli.Options options) throws
+    IncompleteCliException {
     GracefulCliParser parser = new GracefulCliParser();
     try {
       CommandLine commandLine = parser.parse(options, args);
@@ -84,16 +103,10 @@ public final class ValdrBeanValidation {
     }
   }
 
-  private static Options createCliOptions() {
-    Options options = new Options();
-    Option packageNameOption = new Option("p", true, "comma-separated list of fully qualified names of packages "
-      + "in which you keep JSR 303 annotated model classes");
-    packageNameOption.setRequired(true);
-    options.addOption(packageNameOption);
-    options.addOption("c", true,
-      "comma-separated list of fully qualified class names of custom JSR 303 " + "annotations");
-    options.addOption("o", true, "output file to which the validation meta-model (JSON) is written, "
-      + "if omitted the output is sent to system out");
+  private static org.apache.commons.cli.Options createCliOptions() {
+    org.apache.commons.cli.Options options = new org.apache.commons.cli.Options();
+    options.addOption(new Option("cf", true,
+      "path to JSON config file, if omitted valdr-bean-validation.json is " + "expected at root of class path"));
     return options;
   }
 
@@ -107,16 +120,6 @@ public final class ValdrBeanValidation {
       try (Writer writer = new OutputStreamWriter(new FileOutputStream(file), "utf-8")) {
         writer.write(output);
       }
-    }
-  }
-
-  private static final Splitter CLI_OPTION_SPLITTER = Splitter.on(',').omitEmptyStrings();
-    
-  private static List<String> toList(String commaSeparatedArg) {
-    if (StringUtils.isEmpty(commaSeparatedArg)) {
-      return Collections.emptyList();
-    } else {
-      return CLI_OPTION_SPLITTER.splitToList(commaSeparatedArg);
     }
   }
 }
