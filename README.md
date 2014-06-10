@@ -84,6 +84,20 @@ Example of web.xml:
 </servlet>
 ```
 
+## Dependency on valdr
+
+valdr Bean Validation is dependent on valdr in two ways:
+
+* [JSON structure](https://github.com/netceteragroup/valdr#constraints-json) is defined by valdr
+* validators listed in the JSON document have to be either a [supported valdr valdidator]
+(https://github.com/netceteragroup/valdr#built-in-validators) or one of your [custom JavaScript validators](https://github.com/netceteragroup/valdr#adding-custom-validators)
+
+To indicate which valdr version a specific valdr Bean Validation version supports there's a simple rule: the first
+digit of the valdr Bean Validation version denotes the supported valdr version. Version 1.x will support valdr 1.
+This means that valdr Bean Validation 1.x+1 may introduce breaking changes over 1.x because the second version digit
+kind-of represents the "major" version.
+
+
 ## License
 
 [MIT](http://opensource.org/licenses/MIT) © Netcetera AG
