@@ -1,7 +1,7 @@
 {
-  "modelPackageNames": ["com.github.valdr.demo.model"],
-  "excludedClassNames": ["com.github.valdr.demo.model.IgnoredClass"],
-  "customAnnotationClassNames": ["org.hibernate.validator.constraints.CreditCardNumber"],
+  "modelPackages": ["com.github.valdr.demo.model"],
+  "excludedClasses": ["com.github.valdr.demo.model.IgnoredClass"],
+  "customAnnotationClasses": ["org.hibernate.validator.constraints.CreditCardNumber"],
   "corsAllowOriginPattern": "*",
   "outputFile": "${project.build.directory}/${project.build.finalName}/constraints.json"
 }

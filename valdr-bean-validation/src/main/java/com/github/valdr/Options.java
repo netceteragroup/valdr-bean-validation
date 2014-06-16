@@ -25,13 +25,13 @@ public final class Options {
    * Mandatory: yes
    * Use: CLI/Servlet
    */
-  private List<String> modelPackageNames = Lists.newArrayList();
+  private List<String> modelPackages = Lists.newArrayList();
 
   /**
    * Collection of fully qualified class names (e.g. com.company.abc.model.Token) to exclude from parsing. Naturally
-   * this only makes sense for classes contained in packages included in {@code modelPackageNames}.
+   * this only makes sense for classes contained in packages included in {@code modelPackages}.
    */
-  private List<String> excludedClassNames = Lists.newArrayList();
+  private List<String> excludedClasses = Lists.newArrayList();
 
   /**
    * Collection of custom validator annotation class names. By default only the ones defined in {@link
@@ -40,7 +40,7 @@ public final class Options {
    * Mandatory: no
    * Use: CLI/Servlet
    */
-  private List<String> customAnnotationClassNames = Lists.newArrayList();
+  private List<String> customAnnotationClasses = Lists.newArrayList();
 
   /**
    * In case the Servlet is deployed under a different domain than the valdr client you can use <a
@@ -67,7 +67,7 @@ public final class Options {
    * @throws InvalidConfigurationException if problems are detected
    */
   public void validate() {
-    if (getModelPackageNames().isEmpty()) {
+    if (this.getModelPackages().isEmpty()) {
       throw new InvalidConfigurationException("Model package names must not be empty.");
     }
   }

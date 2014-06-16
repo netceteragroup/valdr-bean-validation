@@ -79,7 +79,7 @@ public class ConstraintParser {
   }
 
   private Iterable<? extends Class<? extends Annotation>> getConfiguredCustomAnnotations() {
-    return Iterables.transform(options.getCustomAnnotationClassNames(), new Function<String,
+    return Iterables.transform(options.getCustomAnnotationClasses(), new Function<String,
       Class<? extends Annotation>>() {
       @Override
       @SuppressWarnings("unchecked")

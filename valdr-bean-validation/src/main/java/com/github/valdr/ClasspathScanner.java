@@ -35,8 +35,8 @@ public class ClasspathScanner {
    * Scans the classpath to find all classes that are in the configured model packages. It ignores excluded classes.
    *
    * @return classes to parse
-   * @see com.github.valdr.Options#getModelPackageNames()
-   * @see com.github.valdr.Options#getExcludedClassNames()
+   * @see com.github.valdr.Options#getModelPackages()
+   * @see com.github.valdr.Options#getExcludedClasses()
    */
   public Set<Class<?>> findClassesToParse() {
     Reflections reflections = new Reflections(new ConfigurationBuilder().
@@ -47,7 +47,7 @@ public class ClasspathScanner {
 
   private Collection<URL> buildClassLoaderUrls() {
     Collection<URL> urls = Sets.newHashSet();
-    for (String packageName : options.getModelPackageNames()) {
+    for (String packageName : options.getModelPackages()) {
       if (StringUtils.isNotEmpty(packageName)) {
         urls.addAll(ClasspathHelper.forPackage(packageName));
       }
@@ -58,11 +58,11 @@ public class ClasspathScanner {
   private Predicate<String> buildPackagePredicates() {
     FilterBuilder filterBuilder = new FilterBuilder();
     // Include package names
-    for (String packageName : options.getModelPackageNames()) {
+    for (String packageName : options.getModelPackages()) {
       filterBuilder.include(FilterBuilder.prefix(packageName));
     }
     // Exclude class names
-    for (String excludedClassName : options.getExcludedClassNames()) {
+    for (String excludedClassName : options.getExcludedClasses()) {
       filterBuilder.exclude("^" + StringUtils.replace(excludedClassName, ".", "\\.") + "\\.class$");
     }
     return filterBuilder;

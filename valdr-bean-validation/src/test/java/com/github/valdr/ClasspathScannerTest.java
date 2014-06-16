@@ -80,10 +80,10 @@ public class ClasspathScannerTest {
     };
   }
 
-  private ClasspathScanner scannerFor(List<String> modelPackageNames, List<String> excludedClassNames) {
+  private ClasspathScanner scannerFor(List<String> modelPackages, List<String> excludedClasses) {
     Options options = new Options();
-    options.setModelPackageNames(modelPackageNames);
-    options.setExcludedClassNames(excludedClassNames);
+    options.setModelPackages(modelPackages);
+    options.setExcludedClasses(excludedClasses);
     return new ClasspathScanner(options);
   }
 

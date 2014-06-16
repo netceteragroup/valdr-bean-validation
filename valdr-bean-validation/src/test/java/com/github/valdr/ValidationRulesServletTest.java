@@ -54,7 +54,7 @@ public class ValidationRulesServletTest {
   public void shouldUseCustomConfigFileIfProvided() throws IOException, ServletException {
     // given
     String configFile = createTempFile("{\n" +
-      "  \"modelPackageNames\": [\"com.github.valdr.model.b\"],\n" +
+      "  \"modelPackages\": [\"com.github.valdr.model.b\"],\n" +
       "  \"corsAllowOriginPattern\": \"abc.com\"\n" +
       "}");
 

@@ -215,10 +215,10 @@ public class ConstraintParserTest {
     assertThat(json, containsString("/\\\\\\\\abc\\\\./")); // JSON needs to escape \ -> double escape here
   }
 
-  private void parserConfiguredFor(List<String> modelPackageNames, List<String> customAnnotationClassNames) {
+  private void parserConfiguredFor(List<String> modelPackages, List<String> customAnnotationClasses) {
     Options options = new Options();
-    options.setModelPackageNames(modelPackageNames);
-    options.setCustomAnnotationClassNames(customAnnotationClassNames);
+    options.setModelPackages(modelPackages);
+    options.setCustomAnnotationClasses(customAnnotationClasses);
     parser = new ConstraintParser(options);
   }
 

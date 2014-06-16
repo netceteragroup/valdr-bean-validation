@@ -87,7 +87,7 @@ public class ValdrBeanValidationTest {
     SysOutSlurper sysOutSlurper = new SysOutSlurper();
     sysOutSlurper.activate();
 
-    String[] args = {"-cf", createTempFile("{\"modelPackageNames\":[\"bar.foo.inexistent\"]}")};
+    String[] args = {"-cf", createTempFile("{\"modelPackages\":[\"bar.foo.inexistent\"]}")};
 
     // when
     ValdrBeanValidation.main(args);
@@ -105,7 +105,7 @@ public class ValdrBeanValidationTest {
     // given
     File outputTempFile = File.createTempFile("output", "txt");
 
-    String[] args = {"-cf", createTempFile("{\"modelPackageNames\":[\"bar.foo.inexistent\"]," +
+    String[] args = {"-cf", createTempFile("{\"modelPackages\":[\"bar.foo.inexistent\"]," +
       "\"outputFile\":\""+outputTempFile.getAbsolutePath()+"\"}")};
 
     // when
