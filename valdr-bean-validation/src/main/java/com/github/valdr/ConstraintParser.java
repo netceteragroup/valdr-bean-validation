@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.github.valdr.serializer.MinimalMapSerializer;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import lombok.SneakyThrows;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +64,7 @@ public class ConstraintParser {
     return toJson(classNameToValidationRulesMap);
   }
 
+  @SneakyThrows(IOException.class)
   private String toJson(Map<String, ClassConstraints> classNameToValidationRulesMap) {
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -71,11 +73,7 @@ public class ConstraintParser {
     objectMapper.registerModule(module);
 
     ObjectWriter ow = objectMapper.writer().withDefaultPrettyPrinter();
-    try {
-      return ow.writeValueAsString(classNameToValidationRulesMap);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    return ow.writeValueAsString(classNameToValidationRulesMap);
   }
 
   private Iterable<? extends Class<? extends Annotation>> getConfiguredCustomAnnotations() {

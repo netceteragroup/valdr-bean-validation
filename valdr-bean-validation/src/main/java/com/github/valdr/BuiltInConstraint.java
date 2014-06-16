@@ -6,6 +6,7 @@ import com.github.valdr.decorator.PatternDecorator;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.Digits;
@@ -60,12 +61,9 @@ public enum BuiltInConstraint {
    * @param attributes the attributes to decorate
    * @return decorator
    */
+  @SneakyThrows(ReflectiveOperationException.class)
   public AbstractConstraintAttributesDecorator createDecoratorFor(ConstraintAttributes attributes) {
-    try {
-      return decorator.getConstructor(ConstraintAttributes.class).newInstance(attributes);
-    } catch (Exception e) {
-      throw new IllegalStateException(e);
-    }
+    return decorator.getConstructor(ConstraintAttributes.class).newInstance(attributes);
   }
 
   /**
