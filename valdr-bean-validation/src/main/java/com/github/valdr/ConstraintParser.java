@@ -5,24 +5,15 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.github.valdr.serializer.MinimalMapSerializer;
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 import org.reflections.Reflections;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-import org.reflections.util.FilterBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
-import java.net.URL;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Parses classes in defined packages for supported <a href="http://beanvalidation.org/">Bean Validation (JSR 303)</a>
@@ -35,16 +26,18 @@ import java.util.Set;
 public class ConstraintParser {
   private final Logger logger = LoggerFactory.getLogger(ConstraintParser.class);
 
-  private final Options parserConfiguration;
+  private final ClasspathScanner classpathScanner;
   private final Iterable<Class<? extends Annotation>> allRelevantAnnotationClasses;
+  private final Options options;
 
   /**
    * Constructor.
    *
-   * @param parserConfiguration the only relevant input for the parser is this configuration
+   * @param options the only relevant input for the parser is this configuration
    */
-  public ConstraintParser(Options parserConfiguration) {
-    this.parserConfiguration = parserConfiguration;
+  public ConstraintParser(Options options) {
+    this.options = options;
+    this.classpathScanner = new ClasspathScanner(options);
     allRelevantAnnotationClasses = Iterables.concat(BuiltInConstraint.getAllBeanValidationAnnotations(),
       getConfiguredCustomAnnotations());
   }
@@ -57,7 +50,7 @@ public class ConstraintParser {
   public String parse() {
     Map<String, ClassConstraints> classNameToValidationRulesMap = new HashMap<>();
 
-    for (Class clazz : findClassesToParse()) {
+    for (Class clazz : classpathScanner.findClassesToParse()) {
       if (clazz != null) {
         ClassConstraints classValidationRules = new AnnotatedClass(clazz,
           allRelevantAnnotationClasses).extractValidationRules();
@@ -85,15 +78,8 @@ public class ConstraintParser {
     }
   }
 
-  private Set<Class<?>> findClassesToParse() {
-    Reflections reflections = new Reflections(new ConfigurationBuilder().
-      setUrls(buildClassLoaderUrls()).setScanners(new SubTypesScanner(false)).filterInputsBy(buildPackagePredicates()));
-
-    return reflections.getSubTypesOf(Object.class);
-  }
-
   private Iterable<? extends Class<? extends Annotation>> getConfiguredCustomAnnotations() {
-    return Iterables.transform(parserConfiguration.getCustomAnnotationClassNames(), new Function<String,
+    return Iterables.transform(options.getCustomAnnotationClassNames(), new Function<String,
       Class<? extends Annotation>>() {
       @Override
       @SuppressWarnings("unchecked")
@@ -108,21 +94,5 @@ public class ConstraintParser {
         }
       }
     });
-  }
-
-  private Collection<URL> buildClassLoaderUrls() {
-    Collection<URL> urls = Sets.newHashSet();
-    for (String packageName : parserConfiguration.getModelPackageNames()) {
-      urls.addAll(ClasspathHelper.forPackage(packageName));
-    }
-    return urls;
-  }
-
-  private Predicate<String> buildPackagePredicates() {
-    FilterBuilder filterBuilder = new FilterBuilder();
-    for (String packageName : parserConfiguration.getModelPackageNames()) {
-      filterBuilder.include(FilterBuilder.prefix(packageName));
-    }
-    return filterBuilder;
   }
 }

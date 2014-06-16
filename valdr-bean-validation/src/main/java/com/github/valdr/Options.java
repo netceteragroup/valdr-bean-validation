@@ -27,6 +27,12 @@ public final class Options {
   private List<String> modelPackageNames = Lists.newArrayList();
 
   /**
+   * Collection of class names to exclude from parsing. Naturally this only makes sense for classes contained in
+   * packages included in {@code modelPackageNames}.
+   */
+  private List<String> excludedClassNames = Lists.newArrayList();
+
+  /**
    * Collection of custom validator annotation class names. By default only the ones defined in {@link
    * BuiltInConstraint} are processed.
    *
