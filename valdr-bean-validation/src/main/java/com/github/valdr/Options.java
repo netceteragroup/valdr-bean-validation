@@ -19,7 +19,8 @@ public final class Options {
   public static final String CONFIG_FILE_NAME = "valdr-bean-validation.json";
 
   /**
-   * Collection of fully qualified package names in which you keep Bean Validation annotated model classes.
+   * Collection of fully qualified package names (e.g. com.company.abc.model) in which you keep Bean Validation
+   * annotated model classes.
    *
    * Mandatory: yes
    * Use: CLI/Servlet
@@ -27,8 +28,8 @@ public final class Options {
   private List<String> modelPackageNames = Lists.newArrayList();
 
   /**
-   * Collection of class names to exclude from parsing. Naturally this only makes sense for classes contained in
-   * packages included in {@code modelPackageNames}.
+   * Collection of fully qualified class names (e.g. com.company.abc.model.Token) to exclude from parsing. Naturally
+   * this only makes sense for classes contained in packages included in {@code modelPackageNames}.
    */
   private List<String> excludedClassNames = Lists.newArrayList();
 
