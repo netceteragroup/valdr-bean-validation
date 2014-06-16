@@ -34,6 +34,13 @@ public final class Options {
   private List<String> excludedClasses = Lists.newArrayList();
 
   /**
+   * Collection of fully qualified field names (e.g. com.company.abc.model.Person#shoeSize). Fields contained in this
+   * list will not be included in the constraints JSON document. Naturally this only makes sense for fields of classes
+   * contained in packages included in {@code modelPackages}.
+   */
+  private List<String> excludedFields = Lists.newArrayList();
+
+  /**
    * Collection of custom validator annotation class names. By default only the ones defined in {@link
    * BuiltInConstraint} are processed.
    *

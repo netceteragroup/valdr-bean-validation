@@ -22,4 +22,6 @@ public class Person {
   private String withBackslashes;
   @Pattern(regexp = "\\\\abc\\.")
   private String withMoreBackslashes;
+  @NotNull
+  private String ignoredField;
 }

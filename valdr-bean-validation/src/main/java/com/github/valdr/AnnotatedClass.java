@@ -8,6 +8,7 @@ import org.reflections.ReflectionUtils;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,15 +17,19 @@ import java.util.Set;
  */
 public class AnnotatedClass {
   private final Class clazz;
+  private final List<String> excludedFields;
   private final Iterable<Class<? extends Annotation>> relevantAnnotationClasses;
 
   /**
    * @param clazz                     wrapped class
+   * @param excludedFields            collection of fully qualified field names which are skipped by the parser
    * @param relevantAnnotationClasses only these annotation classes are considered when {@link
    *                                  AnnotatedClass#extractValidationRules()} is invoked
    */
-  AnnotatedClass(Class clazz, Iterable<Class<? extends Annotation>> relevantAnnotationClasses) {
+  AnnotatedClass(Class clazz, List<String> excludedFields, Iterable<Class<? extends Annotation>>
+    relevantAnnotationClasses) {
     this.clazz = clazz;
+    this.excludedFields = excludedFields;
     this.relevantAnnotationClasses = relevantAnnotationClasses;
   }
 
@@ -35,16 +40,23 @@ public class AnnotatedClass {
    * @see AnnotatedClass(Class, Iterable)
    */
   ClassConstraints extractValidationRules() {
-    final ClassConstraints fieldNameToValidationRulesMap = new ClassConstraints();
+    final ClassConstraints classConstraints = new ClassConstraints();
     Set<Field> allFields = ReflectionUtils.getAllFields(clazz, buildAnnotationsPredicate());
     for (Field field : allFields) {
-      FieldConstraints fieldValidationRules = new AnnotatedField(field,
-        relevantAnnotationClasses).extractValidationRules();
-      if (fieldValidationRules.size() > 0) {
-        fieldNameToValidationRulesMap.put(field.getName(), fieldValidationRules);
+      if (isNotExcluded(field)) {
+        FieldConstraints fieldValidationRules = new AnnotatedField(field,
+          relevantAnnotationClasses).extractValidationRules();
+        if (fieldValidationRules.size() > 0) {
+          classConstraints.put(field.getName(), fieldValidationRules);
+        }
       }
     }
-    return fieldNameToValidationRulesMap;
+    return classConstraints;
+  }
+
+  private boolean isNotExcluded(Field field) {
+    String fullyQualifiedFieldName = field.getDeclaringClass().getName() + "#" + field.getName();
+    return !excludedFields.contains(fullyQualifiedFieldName);
   }
 
   private Predicate<? super Field> buildAnnotationsPredicate() {

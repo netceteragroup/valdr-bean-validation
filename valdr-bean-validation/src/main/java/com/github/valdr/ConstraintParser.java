@@ -52,7 +52,7 @@ public class ConstraintParser {
 
     for (Class clazz : classpathScanner.findClassesToParse()) {
       if (clazz != null) {
-        ClassConstraints classValidationRules = new AnnotatedClass(clazz,
+        ClassConstraints classValidationRules = new AnnotatedClass(clazz, options.getExcludedFields(),
           allRelevantAnnotationClasses).extractValidationRules();
         if (classValidationRules.size() > 0) {
           classNameToValidationRulesMap.put(clazz.getSimpleName(), classValidationRules);
