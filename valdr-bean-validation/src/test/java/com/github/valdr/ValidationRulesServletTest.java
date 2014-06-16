@@ -3,6 +3,8 @@ package com.github.valdr;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.servlet.ServletConfig;
@@ -11,11 +13,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.mock;
+import static org.mockito.Matchers.contains;
 
 /**
  * Tests ValidationRulesServlet.
@@ -24,17 +28,21 @@ public class ValidationRulesServletTest {
 
   private final ValidationRulesServlet servlet = new ValidationRulesServlet();
   private ServletConfig servletConfig;
+  private MockHttpServletResponse response;
+  private MockHttpServletRequest request;
 
   @Before
   public void setUp() throws Exception {
     servletConfig = mock(ServletConfig.class);
+    response = new MockHttpServletResponse();
+    request = new MockHttpServletRequest();
   }
 
   /**
    * See method name.
    */
   @Test
-  public void shouldThrowExceptionIfNoConfigFileExists  () throws ServletException {
+  public void shouldThrowExceptionIfNoConfigFileExists() throws ServletException {
     // given
     given(servletConfig.getInitParameter("configFile")).willReturn("");
 
@@ -53,12 +61,10 @@ public class ValidationRulesServletTest {
   @Test
   public void shouldUseCustomConfigFileIfProvided() throws IOException, ServletException {
     // given
-    String configFile = createTempFile("{\n" +
+    givenThisConfiguration("{\n" +
       "  \"modelPackages\": [\"com.github.valdr.model.b\"],\n" +
       "  \"corsAllowOriginPattern\": \"abc.com\"\n" +
       "}");
-
-    given(servletConfig.getInitParameter("configFile")).willReturn(configFile);
 
     // when
     servlet.init(servletConfig);
@@ -66,6 +72,49 @@ public class ValidationRulesServletTest {
     // then
     assertThat(ReflectionTestUtils.getField(servlet, "correctlyConfigured").toString(), is("true"));
     assertThat(ReflectionTestUtils.getField(servlet, "corsAllowOriginPattern").toString(), is("abc.com"));
+  }
+
+  /**
+   * See method name.
+   */
+  @Test
+  public void shouldSendErrorIfNotCorrectlyConfigured() throws IOException, ServletException {
+    // given mandatory 'modelPackages' is missing
+    givenThisConfiguration("{\n" +
+      "  \"corsAllowOriginPattern\": \"abc.com\"\n" +
+      "}");
+    servlet.init(servletConfig);
+
+    // when
+    servlet.doGet(request, response);
+
+    // then
+    assertThat(response.getStatus(), is(500));
+    assertThat(response.getErrorMessage(), containsString("Invalid configuration"));
+  }
+
+  /**
+   * See method name.
+   */
+  @Test
+  public void shouldSendHttp200IfAllIsWell() throws IOException, ServletException {
+    // given
+    givenThisConfiguration("{\n" +
+      "  \"modelPackages\": [\"com.github.valdr.model.b\"],\n" +
+      "  \"corsAllowOriginPattern\": \"abc.com\"\n" +
+      "}");
+    servlet.init(servletConfig);
+
+    // when
+    servlet.doGet(request, response);
+
+    // then
+    assertThat(response.getStatus(), is(200));
+  }
+
+  private void givenThisConfiguration(String jsonString) throws IOException {
+    String configFile = createTempFile(jsonString);
+    given(servletConfig.getInitParameter("configFile")).willReturn(configFile);
   }
 
   private String createTempFile(String string) throws IOException {
