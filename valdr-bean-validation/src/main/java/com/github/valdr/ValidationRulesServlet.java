@@ -18,10 +18,10 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 
 /**
- * Produces JSON validation rules on the fly parsing model classes in your classpath. Upon each request the
+ * <p>Produces JSON validation rules on the fly parsing model classes in your classpath. Upon each request the
  * configured model packages in the classpath are parsed for classes containing supported or
  * custom Bean Validation annotations. The Servlet then builds and returns a JSON document with all validation rules
- * (i.e. Bean Validation constraints). The JSON document adheres to structure specified by valdr.
+ * (i.e. Bean Validation constraints). The JSON document adheres to structure specified by valdr.</p>
  *
  * Servlet can be configured using following {@link javax.servlet.ServletConfig} init parameters (* = mandatory):
  * <ul>
