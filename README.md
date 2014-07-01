@@ -15,15 +15,24 @@ validation rules on the server and on the AngularJS client.
 and delivered with the web application
 - _online use:_ Servlet which parses model classes at runtime and sends JSON back to AngularJS client (e.g. during
 client start or on-demand)
-- both Servlet and CLI client support the same config options
+- both Servlet and CLI client support the [exact same config options](https://github.com/netceteragroup/valdr-bean-validation/blob/master/valdr-bean-validation-demo/src/main/resources/valdr-bean-validation.json)
   - list of packages to scan
+  - list of classes in those packages to exclude
+  - list of fields to exclude
   - list of custom annotation classes to include in JSON
-  - more to come: [#16](/../../issues/16), [#17](/../../issues/17), [#18](/../../issues/18), [#19](/../../issues/19)
 - Servlet offers built-in [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) support
 
 ## Use
 
 Check out the [demo](valdr-bean-validation-demo) for usage samples of both CLI client and Servlet.
+
+```xml
+<dependency>
+  <groupId>com.github.valdr</groupId>
+  <artifactId>valdr-bean-validation</artifactId>
+  <version>1.1.0</version>
+</dependency>
+```
 
 ### CLI client
 
@@ -46,16 +55,10 @@ Example of Maven integration:
       </executions>
       <configuration>
         <mainClass>com.github.valdr.cli.ValdrBeanValidation</mainClass>
+        <!-- if omitted valdr-bean-validation.json is expected at the root of the class path -->
         <arguments>
-          <argument>-p</argument>
-          <argument>com.github.valdr.demo.model</argument>
-          <argument>-c</argument>
-          <argument>org.hibernate.validator.constraints.CreditCardNumber</argument>
-          <argument>-o</argument>
-          <!--rules.json is written to target/<war-module-name>-<version>
-              i.e. it'll be in the root folder of the final WAR file -->
-          <argument>${project.build.directory}/${project.build.finalName}/rules.json</argument>
-        </arguments>
+          <argument>-cf</argument>
+          <argument>my-config.json</argument>
       </configuration>
     </plugin>
   </plugins>
@@ -69,17 +72,10 @@ Example of web.xml:
 <servlet>
   <servlet-name>valdr Bean Validation Servlet</servlet-name>
   <servlet-class>com.github.valdr.ValidationRulesServlet</servlet-class>
+  <!-- if omitted valdr-bean-validation.json is expected at the root of the class path -->
   <init-param>
-    <param-name>modelPackages</param-name>
-    <param-value>com.github.valdr.demo.model</param-value>
-  </init-param>
-  <init-param>
-    <param-name>customAnnotationClassNames</param-name>
-    <param-value>org.hibernate.validator.constraints.CreditCardNumber</param-value>
-  </init-param>
-  <init-param>
-    <param-name>corsAllowOriginPattern</param-name>
-    <param-value>*</param-value>
+    <param-name>configFile</param-name>
+    <param-value>my-config.json</param-value>
   </init-param>
 </servlet>
 ```
