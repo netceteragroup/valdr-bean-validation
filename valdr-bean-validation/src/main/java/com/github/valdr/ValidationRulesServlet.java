@@ -2,6 +2,7 @@ package com.github.valdr;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +65,7 @@ public class ValidationRulesServlet extends HttpServlet {
   }
 
   private Options loadOptions() {
-    InputStream inputStream;
+    InputStream inputStream = null;
     String configFile = getInitParameter("configFile");
     try {
       if (StringUtils.isEmpty(configFile)) {
@@ -78,6 +79,8 @@ public class ValidationRulesServlet extends HttpServlet {
       return new ObjectMapper().readValue(inputStream, Options.class);
     } catch (IOException e) {
       throw new IllegalArgumentException("Cannot read config file.", e);
+    } finally {
+      IOUtils.closeQuietly(inputStream);
     }
   }
 

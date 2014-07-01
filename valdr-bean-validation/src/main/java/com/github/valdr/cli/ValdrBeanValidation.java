@@ -7,6 +7,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -58,7 +59,7 @@ public final class ValdrBeanValidation {
   }
 
   private static Options loadOptions(CommandLine cli) {
-    InputStream inputStream;
+    InputStream inputStream = null;
     String configFile = cli.getOptionValue("cf");
 
     try {
@@ -74,6 +75,8 @@ public final class ValdrBeanValidation {
       return new ObjectMapper().readValue(inputStream, Options.class);
     } catch (IOException e) {
       throw new IllegalArgumentException("Cannot read config file.", e);
+    } finally {
+      IOUtils.closeQuietly(inputStream);
     }
   }
 
