@@ -74,6 +74,8 @@
          mvn -N versions:display-plugin-updates
      -->
 
+    <!-- Turn of the silly Java 8 Javadoc linter. -->
+    <additionalparam>-Xdoclint:none</additionalparam>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
