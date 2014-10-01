@@ -1,8 +1,22 @@
+
 # valdr Bean Validation [![Build Status](https://travis-ci.org/netceteragroup/valdr-bean-validation.svg?branch=master)](https://travis-ci.org/netceteragroup/valdr-bean-validation) [![Coverage Status](https://coveralls.io/repos/netceteragroup/valdr-bean-validation/badge.png?branch=master)](https://coveralls.io/r/netceteragroup/valdr-bean-validation?branch=master)
 
 [Bean Validation](http://beanvalidation.org/) (JSR 303) plugin for [valdr](https://github.com/netceteragroup/valdr),
 the new AngularJS Model Validator.
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<!-- **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*-->
+
+  - [Offering](#offering)
+  - [Features](#features)
+  - [Use](#use)
+    - [CLI client](#cli-client)
+    - [Servlet](#servlet)
+  - [Dependency on valdr](#dependency-on-valdr)
+  - [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 ## Offering
 
 valdr Bean Validation parses Java model classes for Bean Validation constraints (aka JSR 303 annotations)
