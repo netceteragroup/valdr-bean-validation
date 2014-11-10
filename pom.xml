@@ -79,8 +79,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <source.version>1.7</source.version>
-    <target.version>1.7</target.version>
+    <source.version>1.8</source.version>
+    <target.version>1.8</target.version>
 
     <!-- plugin versions -->
     <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -102,7 +102,7 @@
     <junit.version>4.11</junit.version>
     <lombok.version>1.14.0</lombok.version>
     <mockito.version>1.9.5</mockito.version>
-    <reflections.version>0.9.8</reflections.version>
+	<reflections.version>0.9.9</reflections.version>
     <servlet-api.version>3.0.1</servlet-api.version>
     <slf4j.version>1.7.7</slf4j.version>
     <spring.version>4.0.5.RELEASE</spring.version>
