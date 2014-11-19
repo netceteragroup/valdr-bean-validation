@@ -17,6 +17,7 @@ the new AngularJS Model Validator.
     - [CLI client](#cli-client)
     - [Servlet](#servlet)
   - [Dependency on valdr](#dependency-on-valdr)
+  - [Support](#support)
   - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -110,6 +111,9 @@ digit of the valdr Bean Validation version denotes the supported valdr version. 
 This means that valdr Bean Validation 1.x+1 may introduce breaking changes over 1.x because the second version digit
 kind-of represents the "major" version.
 
+## Support
+
+Open a question on SO and tag it with [`valdr-bean-validation`](http://stackoverflow.com/tags/valdr-bean-validation).
 
 ## License
 
