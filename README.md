@@ -79,6 +79,8 @@ Example of Maven integration:
         <arguments>
           <argument>-cf</argument>
           <argument>my-config.json</argument>
+          <argument>--outputFile</argument>
+          <argument>${basedir}/src/main/webapp/validation/validation.json</argument>
       </configuration>
     </plugin>
   </plugins>
