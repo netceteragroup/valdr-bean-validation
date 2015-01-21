@@ -40,6 +40,14 @@ public class ConstraintAttributes implements MinimalObjectMap {
   public Object put(String key, Object value) {
     return map.put(key, value);
   }
+  
+  public Object remove(String key) {
+      return map.remove(key);
+  }
+  
+  public Object get(String key) {
+      return map.get(key);
+  }
 
   private void removeUnusedAttributes(Map<String, Object> annotationAttributes) {
     Iterator<String> it = annotationAttributes.keySet().iterator();

@@ -1,9 +1,10 @@
 package com.github.valdr.decorator;
 
-import com.github.valdr.ConstraintAttributes;
-
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import com.github.valdr.ConstraintAttributes;
 
 /**
  * Decorates the map of attributes of the {@link javax.validation.constraints.Pattern} constraint.
@@ -31,12 +32,15 @@ public class PatternDecorator extends AbstractConstraintAttributesDecorator {
   @Override
   public Set<Map.Entry<String, Object>> entrySet() {
     Set<Map.Entry<String, Object>> entrySet = getDecoratee().entrySet();
+    Map<String, Object> result = new HashMap<>();
     for (Map.Entry<String, Object> entry : entrySet) {
       if ("regexp".equals(entry.getKey())) {
-        entry.setValue(javaToJavaScriptRegexpPattern(entry));
+        result.put("value", javaToJavaScriptRegexpPattern(entry));
+      } else {
+          result.put(entry.getKey(), entry.getValue());
       }
     }
-    return entrySet;
+    return result.entrySet();
   }
 
   private String javaToJavaScriptRegexpPattern(Map.Entry<String, Object> entry) {
