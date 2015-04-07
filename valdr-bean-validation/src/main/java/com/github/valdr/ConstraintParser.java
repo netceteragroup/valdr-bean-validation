@@ -1,22 +1,20 @@
 package com.github.valdr;
 
-import java.io.IOException;
-import java.lang.annotation.Annotation;
-import java.util.HashMap;
-import java.util.Map;
-
-import lombok.SneakyThrows;
-
-import org.reflections.ReflectionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.github.valdr.serializer.MinimalMapSerializer;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import lombok.SneakyThrows;
+import org.reflections.ReflectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Parses classes in defined packages for supported <a href="http://beanvalidation.org/">Bean Validation (JSR 303)</a>
