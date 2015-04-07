@@ -182,14 +182,14 @@ public class ConstraintParserTest {
     String json = parser.parse();
     // then
     String expected = "{" + LS +
-      "  \"" + SubClassWithNoValidatedMembers.class.getSimpleName() + "\" : {" + LS +
+      "  \"" + SuperClassWithValidatedMember.class.getSimpleName() + "\" : {" + LS +
       "    \"notNullString\" : {" + LS +
       "      \"required\" : {" + LS +
       "        \"message\" : \"{javax.validation.constraints.NotNull.message}\"" + LS +
       "      }" + LS +
       "    }" + LS +
       "  }," + LS +
-      "  \"" + SuperClassWithValidatedMember.class.getSimpleName() + "\" : {" + LS +
+      "  \"" + SubClassWithNoValidatedMembers.class.getSimpleName() + "\" : {" + LS +
       "    \"notNullString\" : {" + LS +
       "      \"required\" : {" + LS +
       "        \"message\" : \"{javax.validation.constraints.NotNull.message}\"" + LS +
