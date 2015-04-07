@@ -144,9 +144,9 @@ public class ConstraintParserTest {
       "  \"" + TestModelWithHibernateEmailAnnotation.class.getSimpleName() + "\" : {" + LS +
       "    \"email\" : {" + LS +
       "      \"hibernateEmail\" : {" + LS +
+      "        \"message\" : \"{org.hibernate.validator.constraints.Email.message}\"," + LS +
       "        \"flags\" : [ ]," + LS +
-      "        \"regexp\" : \".*\"," + LS +
-      "        \"message\" : \"{org.hibernate.validator.constraints.Email.message}\"" + LS +
+      "        \"regexp\" : \".*\"" + LS +
       "      }" + LS +
       "    }" + LS +
       "  }" + LS +
