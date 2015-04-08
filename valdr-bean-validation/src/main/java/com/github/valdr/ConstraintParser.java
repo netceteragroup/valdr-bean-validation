@@ -7,7 +7,7 @@ import com.github.valdr.serializer.MinimalMapSerializer;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import lombok.SneakyThrows;
-import org.reflections.Reflections;
+import org.reflections.ReflectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,7 +82,7 @@ public class ConstraintParser {
       @Override
       @SuppressWarnings("unchecked")
       public Class<? extends Annotation> apply(String className) {
-        Class<?> validatorClass = Reflections.forName(className);
+        Class<?> validatorClass = ReflectionUtils.forName(className);
         if (validatorClass.isAnnotation()) {
           return (Class<? extends Annotation>) validatorClass;
         } else {
