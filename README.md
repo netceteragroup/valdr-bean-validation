@@ -48,7 +48,7 @@ Check out the [demo](valdr-bean-validation-demo) for usage samples of both CLI c
 <dependency>
   <groupId>com.github.valdr</groupId>
   <artifactId>valdr-bean-validation</artifactId>
-  <version>1.1.0</version>
+  <version>see-latest-version-at-the-top-of-this-page</version>
 </dependency>
 ```
 
