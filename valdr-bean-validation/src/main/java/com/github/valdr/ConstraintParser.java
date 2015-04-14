@@ -56,7 +56,8 @@ public class ConstraintParser {
         ClassConstraints classValidationRules = new AnnotatedClass(clazz, options.getExcludedFields(),
           allRelevantAnnotationClasses).extractValidationRules();
         if (classValidationRules.size() > 0) {
-          classNameToValidationRulesMap.put(clazz.getSimpleName(), classValidationRules);
+          String name = options.getOutputFullTypeName() ? clazz.getName() : clazz.getSimpleName();
+          classNameToValidationRulesMap.put(name, classValidationRules);
         }
       }
     }

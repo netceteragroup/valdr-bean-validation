@@ -38,6 +38,8 @@ client start or on-demand)
   - list of classes in those packages to exclude
   - list of fields to exclude
   - list of custom annotation classes to include in JSON
+  - whether to output simple or full type names
+  - the output file name
 - Servlet offers built-in [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) support
 
 ## Use

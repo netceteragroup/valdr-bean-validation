@@ -60,6 +60,15 @@ public final class Options {
   private String corsAllowOriginPattern = StringUtils.EMPTY;
 
   /**
+   * Whether the output type name should be the simple name of a type (default) or the full type name (i.e., including
+   * the package name).
+   *
+   * Mandatory: no
+   * Use: CLI/Servlet
+   */
+  private Boolean outputFullTypeName = Boolean.FALSE;
+
+  /**
    * File to which the validation meta-model (JSON) is written. Missing folders are created automatically. If omitted
    * the output is sent to system out.
    *
