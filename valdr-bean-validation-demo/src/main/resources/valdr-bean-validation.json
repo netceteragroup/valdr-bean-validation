@@ -4,5 +4,6 @@
   "excludedFields": ["com.github.valdr.demo.model.Person#ignoredField"],
   "customAnnotationClasses": ["org.hibernate.validator.constraints.CreditCardNumber"],
   "corsAllowOriginPattern": "*",
+  "outputFullTypeName": false,
   "outputFile": "${project.build.directory}/${project.build.finalName}/constraints.json"
 }
