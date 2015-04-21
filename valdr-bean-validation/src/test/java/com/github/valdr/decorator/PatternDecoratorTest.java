@@ -23,6 +23,24 @@ public class PatternDecoratorTest {
    * See method name.
    */
   @Test
+  public void shouldStoreThePatternForValueAttribute() {
+    /*
+     * javax.validation.constraints.Pattern uses the attribute 'regex' to define the pattern. However, for valdr the
+     * pattern must be passed in the 'value' attribute.
+     */
+    // given
+    regexPattern("abc");
+    PatternDecorator decorator = new PatternDecorator(constraintAttributes);
+    // when
+    Set<Map.Entry<String, Object>> decoratedEntries = decorator.entrySet();
+    // then
+    assertThat(firstKeyFrom(decoratedEntries), is("value"));
+  }
+
+  /**
+   * See method name.
+   */
+  @Test
   public void shouldAddSlashPrefixSuffix() {
     // given
     regexPattern("abc");
@@ -49,6 +67,10 @@ public class PatternDecoratorTest {
 
   private String firstValueFrom(Set<Map.Entry<String, Object>> decoratedEntries) {
     return decoratedEntries.iterator().next().getValue().toString();
+  }
+
+  private String firstKeyFrom(Set<Map.Entry<String, Object>> decoratedEntries) {
+    return decoratedEntries.iterator().next().getKey();
   }
 
   private void regexPattern(String regexPattern) {

@@ -26,6 +26,7 @@ public class PatternDecorator extends AbstractConstraintAttributesDecorator {
    * <ul>
    * <li>adding '/' prefix and suffix turning a Java pattern like "abc" into "/abc/" for JavaScript</li>
    * </ul>
+   * Furthermore, the 'regexp' attribute is renamed to 'value' because that's what valdr expects.
    *
    * @return the modified entry set
    */
@@ -37,7 +38,7 @@ public class PatternDecorator extends AbstractConstraintAttributesDecorator {
       if ("regexp".equals(entry.getKey())) {
         result.put("value", javaToJavaScriptRegexpPattern(entry));
       } else {
-          result.put(entry.getKey(), entry.getValue());
+        result.put(entry.getKey(), entry.getValue());
       }
     }
     return result.entrySet();
