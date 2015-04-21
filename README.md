@@ -33,13 +33,14 @@ validation rules on the server and on the AngularJS client.
 and delivered with the web application
 - _online use:_ Servlet which parses model classes at runtime and sends JSON back to AngularJS client (e.g. during
 client start or on-demand)
-- both Servlet and CLI client support the [exact same config options](https://github.com/netceteragroup/valdr-bean-validation/blob/master/valdr-bean-validation-demo/src/main/resources/valdr-bean-validation.json)
+- both Servlet and CLI client support a number of [config options](https://github.com/netceteragroup/valdr-bean-validation/blob/master/valdr-bean-validation-demo/src/main/resources/valdr-bean-validation.json)
   - list of packages to scan
   - list of classes in those packages to exclude
   - list of fields to exclude
   - list of custom annotation classes to include in JSON
   - whether to output simple or full type names
-  - the output file name
+  - the output file name (CLI only)
+  - CORS `Access-Control-Allow-Origin` HTTP header value (Servlet only)
 - Servlet offers built-in [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) support
 
 ## Use
@@ -75,12 +76,14 @@ Example of Maven integration:
       </executions>
       <configuration>
         <mainClass>com.github.valdr.cli.ValdrBeanValidation</mainClass>
-        <!-- if omitted valdr-bean-validation.json is expected at the root of the class path -->
         <arguments>
+          <!-- optional, if omitted valdr-bean-validation.json is expected at the root of the class path -->
           <argument>-cf</argument>
           <argument>my-config.json</argument>
-          <argument>--outputFile</argument>
+          <!-- optional, overrides any 'outputFile' which may have been set in the above config file -->
+          <argument>-outputFile</argument>
           <argument>${basedir}/src/main/webapp/validation/validation.json</argument>
+        </arguments>
       </configuration>
     </plugin>
   </plugins>
