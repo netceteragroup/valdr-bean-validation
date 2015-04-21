@@ -17,6 +17,7 @@ the new AngularJS Model Validator.
     - [CLI client](#cli-client)
     - [Servlet](#servlet)
   - [Dependency on valdr](#dependency-on-valdr)
+  - [Mapping of Bean Validation constraints to valdr constraints](#mapping-of-bean-validation-constraints-to-valdr-constraints)
   - [Support](#support)
   - [License](#license)
 
@@ -92,7 +93,7 @@ Example of Maven integration:
 
 ### Servlet
 
-Example of web.xml:
+Example of `web.xml`:
 ```xml
 <servlet>
   <servlet-name>valdr Bean Validation Servlet</servlet-name>
@@ -117,6 +118,23 @@ To indicate which valdr version a specific valdr Bean Validation version support
 digit of the valdr Bean Validation version denotes the supported valdr version. Version 1.x will support valdr 1.
 This means that valdr Bean Validation 1.x+1 may introduce breaking changes over 1.x because the second version digit
 kind-of represents the "major" version.
+
+## Mapping of Bean Validation constraints to valdr constraints
+
+The [BuiltInConstraint.java](https://github.com/netceteragroup/valdr-bean-validation/blob/master/valdr-bean-validation/src/main/java/com/github/valdr/BuiltInConstraint.java) enum defines the mapping of Bean Validation constraints to valdr constraints.
+
+| Bean Validation | valdr | Comment |
+|-----------------|-------|---------|
+| [NotNull](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/NotNull.html) | [required](https://github.com/netceteragroup/valdr#required) |  |
+| [Min](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Min.html) | [min](https://github.com/netceteragroup/valdr#min--max) |  |
+| [Max](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Max.html) | [max](https://github.com/netceteragroup/valdr#min--max) |  |
+| [Size](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Size.html) | [size](https://github.com/netceteragroup/valdr#size) |  |
+| [Digits](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Digits.html) | [digits](https://github.com/netceteragroup/valdr#digits) |  |
+| [Pattern](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Pattern.html) | [pattern](https://github.com/netceteragroup/valdr#partern) | Java regex pattern is transformed to JavaScript pattern |
+| [Future](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Future.html) | [future](https://github.com/netceteragroup/valdr#future--past) |  |
+| [Past](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Past.html) | [past](https://github.com/netceteragroup/valdr#future--past) |  |
+| [Email](https://docs.jboss.org/hibernate/validator/5.1/api/org/hibernate/validator/constraints/Email.html) |[email](https://github.com/netceteragroup/valdr#email) | proprietary Hibernate Validator (not in Bean Validation spec) |
+| [URL](https://docs.jboss.org/hibernate/validator/5.1/api/org/hibernate/validator/constraints/URL.html) |[url](https://github.com/netceteragroup/valdr#url) | proprietary Hibernate Validator (not in Bean Validation spec) |
 
 ## Support
 
