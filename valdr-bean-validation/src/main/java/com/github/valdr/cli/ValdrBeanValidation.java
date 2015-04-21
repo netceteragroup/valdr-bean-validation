@@ -61,6 +61,7 @@ public final class ValdrBeanValidation {
   private static Options loadOptions(CommandLine cli) {
     InputStream inputStream = null;
     String configFile = cli.getOptionValue("cf");
+    String outputFile = cli.getOptionValue("outputFile");
 
     try {
       if (StringUtils.isEmpty(configFile)) {
@@ -72,7 +73,11 @@ public final class ValdrBeanValidation {
         System.out.println("Building parser configuration from configured file path '" + configFile + "'.");
         inputStream = new FileInputStream(new File(configFile));
       }
-      return new ObjectMapper().readValue(inputStream, Options.class);
+      Options opt = new ObjectMapper().readValue(inputStream, Options.class);
+      if (StringUtils.isEmpty(opt.getOutputFile())) {
+         opt.setOutputFile(outputFile);
+      }
+      return opt;
     } catch (IOException e) {
       throw new IllegalArgumentException("Cannot read config file.", e);
     } finally {
@@ -110,6 +115,8 @@ public final class ValdrBeanValidation {
     org.apache.commons.cli.Options options = new org.apache.commons.cli.Options();
     options.addOption(new Option("cf", true,
       "path to JSON config file, if omitted valdr-bean-validation.json is " + "expected at root of class path"));
+    options.addOption(new Option("outputFile", true,
+      "path to output file, which will be used, if no outputFile is specified in the JSON config"));
     return options;
   }
 
