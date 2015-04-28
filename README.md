@@ -138,7 +138,7 @@ The [BuiltInConstraint.java](https://github.com/netceteragroup/valdr-bean-valida
 
 ## Support
 
-Open a question on SO and tag it with [`valdr-bean-validation`](http://stackoverflow.com/tags/valdr-bean-validation).
+[Ask a question on Stack Overflow](http://stackoverflow.com/questions/ask?tags=valdr-bean-validation) and tag it with [`valdr-bean-validation`](http://stackoverflow.com/tags/valdr-bean-validation).
 
 ## License
 
