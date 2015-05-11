@@ -89,6 +89,7 @@
     <maven-resources-plugin.version>2.6</maven-resources-plugin.version>
     <maven-release-plugin.version>2.5</maven-release-plugin.version>
     <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+    <nexus-staging-maven-plugin.version>1.6.5</nexus-staging-maven-plugin.version>
 
     <!-- dependency versions -->
     <bean-validation.version>1.1.0.Final</bean-validation.version>
@@ -236,6 +237,11 @@
           <artifactId>maven-release-plugin</artifactId>
           <version>${maven-release-plugin.version}</version>
         </plugin>
+        <plugin>
+          <groupId>org.sonatype.plugins</groupId>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
+          <version>${nexus-staging-maven-plugin.version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -301,6 +307,16 @@
                 </goals>
               </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
           </plugin>
         </plugins>
       </build>
