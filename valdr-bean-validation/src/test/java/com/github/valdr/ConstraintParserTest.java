@@ -2,6 +2,7 @@ package com.github.valdr;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.valdr.model.i.TestModelWithoutAnyConstraintAnnotations;
 import com.github.valdr.model.a.TestModelWithASingleAnnotatedMember;
 import com.github.valdr.model.b.TestModelWithCustomValidator;
 import com.github.valdr.model.c.TestModelWithASingleAnnotatedMemberWithCustomMessageKey;
@@ -35,6 +36,20 @@ public class ConstraintParserTest {
   public void shouldReturnEmptyJsonObjectWhenNoClassIsFound() {
     // given
     parserConfiguredFor(emptyStringList(), emptyStringList());
+    // when
+    String json = parser.parse();
+    // then
+    assertThat(json, is("{ }"));
+  }
+
+  /**
+   * See method name.
+   */
+  @Test
+  public void shouldReturnEmptyJsonObjectWhenClassHasNoConstraintAnnotations() {
+    // given
+    parserConfiguredFor(Lists.newArrayList(TestModelWithoutAnyConstraintAnnotations.class.getPackage().getName()),
+      emptyStringList());
     // when
     String json = parser.parse();
     // then
