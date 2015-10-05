@@ -58,7 +58,7 @@ public class ClasspathScannerTest {
     Set<Class<?>> classesToParse = classpathScanner.findClassesToParse();
     // then
     assertThat(classesToParse, notContains(TestModelWithASingleAnnotatedMember.class));
-    assertThat(classesToParse.size(), is(9));
+    assertThat(classesToParse.size(), is(10));
   }
 
   private Matcher<? super Set<Class<?>>> notContains(final Class<?> testModelClass) {
