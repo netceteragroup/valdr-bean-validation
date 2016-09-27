@@ -84,6 +84,12 @@ public final class Options {
   private String outputFile = StringUtils.EMPTY;
 
   /**
+   * Whether to output validation annotation group attribute values in the meta-model (JSON). If omitted, validation group
+   * values are not written.
+   */
+  private Boolean outputValidationGroups = Boolean.FALSE;
+
+  /**
    * Validates the consistency and integrity of the configured options.
    *
    * @throws InvalidConfigurationException if problems are detected

@@ -12,15 +12,17 @@ import java.lang.reflect.Field;
 public class AnnotatedField {
   private final Field field;
   private final Iterable<Class<? extends Annotation>> relevantAnnotationClasses;
+  private final boolean outputValidationGroups;
 
   /**
    * @param field                     wrapped field
    * @param relevantAnnotationClasses only these annotation classes are considered when {@link
    *                                  AnnotatedField#extractValidationRules()} is invoked
    */
-  AnnotatedField(Field field, Iterable<Class<? extends Annotation>> relevantAnnotationClasses) {
+  AnnotatedField(Field field, Iterable<Class<? extends Annotation>> relevantAnnotationClasses, boolean outputValidationGroups) {
     this.field = field;
     this.relevantAnnotationClasses = relevantAnnotationClasses;
+    this.outputValidationGroups = outputValidationGroups;
   }
 
   /**
@@ -35,7 +37,7 @@ public class AnnotatedField {
 
     for (Annotation annotation : annotations) {
       if (Iterables.contains(relevantAnnotationClasses, annotation.annotationType())) {
-        ConstraintAttributes constraintAttributes = new ConstraintAttributes(annotation);
+        ConstraintAttributes constraintAttributes = new ConstraintAttributes(annotation, outputValidationGroups);
         BuiltInConstraint supportedValidator = BuiltInConstraint.valueOfAnnotationClassOrNull(annotation
           .annotationType());
         if (supportedValidator == null) {

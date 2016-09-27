@@ -3,10 +3,7 @@ package com.github.valdr;
 import com.github.valdr.thirdparty.spring.AnnotationUtils;
 
 import java.lang.annotation.Annotation;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * All attributes of a constraint (i.e. Bean Validation annotation attributes).
@@ -14,15 +11,22 @@ import java.util.Set;
 public class ConstraintAttributes implements MinimalObjectMap {
 
   private final Map<String, Object> map = new HashMap<>();
+  private final boolean outputValidationGroups;
+  private static final String GROUPS = "groups";
 
   /**
    * Constructor.
    *
    * @param annotation annotation which is queried for attributes
    */
-  public ConstraintAttributes(Annotation annotation) {
+  public ConstraintAttributes(Annotation annotation, boolean outputValidationGroups) {
+    this.outputValidationGroups = outputValidationGroups;
     Map<String, Object> annotationAttributes = AnnotationUtils.getAnnotationAttributes(annotation);
     removeUnusedAttributes(annotationAttributes);
+    if (outputValidationGroups) {
+      validationGroupClassNamesToSimple(annotationAttributes);
+    }
+
     map.putAll(annotationAttributes);
   }
 
@@ -45,9 +49,20 @@ public class ConstraintAttributes implements MinimalObjectMap {
     Iterator<String> it = annotationAttributes.keySet().iterator();
     while (it.hasNext()) {
       String key = it.next();
-      if ("groups".equals(key) || "payload".equals(key)) {
+      if ("payload".equals(key) || (GROUPS.equals(key) && !outputValidationGroups)) {
         it.remove();
       }
+    }
+  }
+
+  private void validationGroupClassNamesToSimple(Map<String, Object> annotationAttributes) {
+    if (annotationAttributes.containsKey(GROUPS)) {
+      Class[] groupClasses = (Class[])annotationAttributes.get(GROUPS);
+      List<String> simpleNames = new ArrayList<>();
+      for(Class groupClass: groupClasses) {
+        simpleNames.add(groupClass.getSimpleName());
+      }
+      annotationAttributes.put(GROUPS, simpleNames);
     }
   }
 }
