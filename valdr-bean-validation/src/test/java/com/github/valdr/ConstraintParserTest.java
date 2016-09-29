@@ -228,16 +228,28 @@ public class ConstraintParserTest {
     // then
     String expected = "{\n" +
             "  \"TestModelWithValidationGroups\" : {\n" +
-            "    \"bar\" : {\n" +
+            "    \"justTwo\" : {\n" +
             "      \"required\" : {\n" +
             "        \"message\" : \"{javax.validation.constraints.NotNull.message}\",\n" +
-            "        \"groups\" : [ \"GroupTwo\", \"GroupOne\" ]\n" +
+            "        \"groups\" : [ \"GroupTwo\" ]\n" +
             "      }\n" +
             "    },\n" +
-            "    \"foo\" : {\n" +
+            "    \"noGroupSpecifiedMeansDefault\" : {\n" +
             "      \"required\" : {\n" +
             "        \"message\" : \"{javax.validation.constraints.NotNull.message}\",\n" +
-            "        \"groups\" : [ \"GroupOne\" ]\n" +
+            "        \"groups\" : [ \"Default\" ]\n" +
+            "      }\n" +
+            "    },\n" +
+            "    \"twoOneAndDefault\" : {\n" +
+            "      \"required\" : {\n" +
+            "        \"message\" : \"{javax.validation.constraints.NotNull.message}\",\n" +
+            "        \"groups\" : [ \"GroupTwo\", \"GroupOne\", \"Default\" ]\n" +
+            "      }\n" +
+            "    },\n" +
+            "    \"oneAndDefault\" : {\n" +
+            "      \"required\" : {\n" +
+            "        \"message\" : \"{javax.validation.constraints.NotNull.message}\",\n" +
+            "        \"groups\" : [ \"GroupOne\", \"Default\" ]\n" +
             "      }\n" +
             "    }\n" +
             "  }\n" +

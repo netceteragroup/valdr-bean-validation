@@ -56,13 +56,29 @@ public class ConstraintAttributes implements MinimalObjectMap {
   }
 
   private void validationGroupClassNamesToSimple(Map<String, Object> annotationAttributes) {
-    if (annotationAttributes.containsKey(GROUPS)) {
-      Class[] groupClasses = (Class[])annotationAttributes.get(GROUPS);
+    Class[] groupClasses = (Class[])annotationAttributes.get(GROUPS);
+    if (groupClasses.length > 0) {
       List<String> simpleNames = new ArrayList<>();
       for(Class groupClass: groupClasses) {
-        simpleNames.add(groupClass.getSimpleName());
+        for(Class c: getThisAndAncestors(groupClass)) {
+          simpleNames.add(c.getSimpleName());
+        }
       }
       annotationAttributes.put(GROUPS, simpleNames);
+    } else {
+      annotationAttributes.put(GROUPS, new String[]{"Default"});
     }
+  }
+
+  private List<Class> getThisAndAncestors(Class aClass) {
+    List<Class> ret = new ArrayList<>();
+    if (!aClass.equals(Object.class)) {
+      ret.add(aClass);
+    }
+    Class[] parents = aClass.getInterfaces();
+    for(Class parent: parents) {
+      ret.addAll(getThisAndAncestors(parent));
+    }
+    return ret;
   }
 }

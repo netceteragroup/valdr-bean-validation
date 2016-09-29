@@ -1,7 +1,9 @@
 package com.github.valdr.util;
 
+import javax.validation.groups.Default;
+
 public class ValidationGroup {
-    public interface GroupOne {
+    public interface GroupOne extends Default {
         // validation group marker interface
     }
 
