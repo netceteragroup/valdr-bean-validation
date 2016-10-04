@@ -8,10 +8,10 @@ import javax.validation.constraints.NotNull;
 @Getter
 public class TestModelWithValidationGroups {
   @NotNull(groups = ValidationGroup.GroupOne.class)
-  private String oneAndDefault;
+  private String oneAndOnePointOne;
 
   @NotNull(groups = {ValidationGroup.GroupTwo.class, ValidationGroup.GroupOne.class})
-  private String twoOneAndDefault;
+  private String twoAndOneAndOnePointOne;
 
   @NotNull(groups = {ValidationGroup.GroupTwo.class})
   private String justTwo;

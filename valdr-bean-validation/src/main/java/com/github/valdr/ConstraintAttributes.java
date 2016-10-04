@@ -2,6 +2,7 @@ package com.github.valdr;
 
 import com.github.valdr.thirdparty.spring.AnnotationUtils;
 
+import javax.validation.groups.Default;
 import java.lang.annotation.Annotation;
 import java.util.*;
 
@@ -57,28 +58,32 @@ public class ConstraintAttributes implements MinimalObjectMap {
 
   private void validationGroupClassNamesToSimple(Map<String, Object> annotationAttributes) {
     Class[] groupClasses = (Class[])annotationAttributes.get(GROUPS);
-    if (groupClasses.length > 0) {
-      List<String> simpleNames = new ArrayList<>();
-      for(Class groupClass: groupClasses) {
-        for(Class c: getThisAndAncestors(groupClass)) {
-          simpleNames.add(c.getSimpleName());
-        }
-      }
-      annotationAttributes.put(GROUPS, simpleNames);
-    } else {
-      annotationAttributes.put(GROUPS, new String[]{"Default"});
+    if (groupClasses.length == 0) {
+      groupClasses = new Class[]{Default.class};
     }
+    
+    Set<String> simpleNames = new HashSet<>();
+    for(Class groupClass: groupClasses) {
+      for(Class c: getThisAndDescendants(groupClass)) {
+        simpleNames.add(c.getSimpleName());
+      }
+    }
+    annotationAttributes.put(GROUPS, simpleNames);
   }
 
-  private List<Class> getThisAndAncestors(Class aClass) {
+  private List<Class> getThisAndDescendants(Class aClass) {
     List<Class> ret = new ArrayList<>();
-    if (!aClass.equals(Object.class)) {
-      ret.add(aClass);
-    }
-    Class[] parents = aClass.getInterfaces();
-    for(Class parent: parents) {
-      ret.addAll(getThisAndAncestors(parent));
-    }
+
+    ret.add(aClass);
+    ret.addAll(ClasspathScanner.getSubTypesOf(aClass));
+    Collections.sort(ret, new Comparator<Class>() {
+      @Override
+      public int compare(Class o1, Class o2) {
+        return o1.getSimpleName().compareTo(o2.getSimpleName());
+      }
+    });
+
     return ret;
   }
+
 }

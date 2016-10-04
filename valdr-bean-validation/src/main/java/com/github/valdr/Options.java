@@ -84,10 +84,17 @@ public final class Options {
   private String outputFile = StringUtils.EMPTY;
 
   /**
-   * Whether to output validation annotation group attribute values in the meta-model (JSON). If omitted, validation group
-   * values are not written.
+   * Whether to output validation annotation group attribute values in the meta-model (JSON). Validation groups are
+   * expanded to include their also descendants. If omitted, validation group values are not written.
    */
   private Boolean outputValidationGroups = Boolean.FALSE;
+
+  /**
+   * Fully qualified names of packages containing validation group interfaces. Must be specified, if
+   * outputValidationGroups is set to TRUE. (Finding subclasses by reflection from ALL classes in a classloader
+   * will spew out warnings, so we restrict the search to certain packages.)
+   */
+  private List<String> validationGroupPackages = Lists.newArrayList();
 
   /**
    * Validates the consistency and integrity of the configured options.
@@ -97,6 +104,9 @@ public final class Options {
   public void validate() {
     if (this.getModelPackages().isEmpty()) {
       throw new InvalidConfigurationException("Model package names must not be empty.");
+    }
+    if (this.getOutputValidationGroups() && this.getValidationGroupPackages().isEmpty()) {
+      throw new InvalidConfigurationException("When outputting validation groups, validationGroupPackages must not be empty.");
     }
   }
 
