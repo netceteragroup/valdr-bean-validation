@@ -6,11 +6,12 @@ import org.hibernate.validator.constraints.URL;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 
 public class Person {
   @NotNull(message = "\\foo")
   private String firstName;
-  @Size(min = 4, max = 31)
+  @Size(min = 4, max = 31, groups={Default.class})
   private String lastName;
   @CreditCardNumber
   private String creditCardNumber;

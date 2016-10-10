@@ -12,15 +12,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Provides means to scan the classpath for model classes that need to be parsed for constraint annotations.
  */
 public class ClasspathScanner {
-  private final Logger logger = LoggerFactory.getLogger(ClasspathScanner.class);
+  private static final Logger logger = LoggerFactory.getLogger(ClasspathScanner.class);
   private final Options options;
+
+  private static Reflections all = null;
+
 
   /**
    * Constructor.
@@ -29,6 +31,16 @@ public class ClasspathScanner {
    */
   public ClasspathScanner(Options options) {
     this.options = options;
+
+    List<String> groupsToScan = new ArrayList(options.getValidationGroupPackages());
+    if (groupsToScan.size() > 0) {
+      groupsToScan.add("javax.validation.groups");
+
+      all = new Reflections(new ConfigurationBuilder().
+              setUrls(buildClassLoaderUrls(groupsToScan)).setScanners(new SubTypesScanner(false)));
+
+    }
+
   }
 
   /**
@@ -40,14 +52,21 @@ public class ClasspathScanner {
    */
   public Set<Class<?>> findClassesToParse() {
     Reflections reflections = new Reflections(new ConfigurationBuilder().
-      setUrls(buildClassLoaderUrls()).setScanners(new SubTypesScanner(false)).filterInputsBy(buildPackagePredicates()));
+      setUrls(buildClassLoaderUrls(options.getModelPackages())).setScanners(new SubTypesScanner(false)).filterInputsBy(buildPackagePredicates()));
 
     return reflections.getSubTypesOf(Object.class);
   }
 
-  private Collection<URL> buildClassLoaderUrls() {
+  // Using a static method accessing a static member is a sneaky optimization to avoid
+  // scanning through a lot of classes when analyzing each constraint annotation.
+  // The member gets set when this class' constructor is called.
+  public static Set<Class<?>> getSubTypesOf(Class aClass) {
+    return all == null ? new HashSet<>() : all.getSubTypesOf(aClass);
+  }
+
+  private Collection<URL> buildClassLoaderUrls(List<String> packageNames) {
     Collection<URL> urls = Sets.newHashSet();
-    for (String packageName : options.getModelPackages()) {
+    for (String packageName : packageNames) {
       if (StringUtils.isNotEmpty(packageName)) {
         urls.addAll(ClasspathHelper.forPackage(packageName));
       }

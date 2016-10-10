@@ -19,6 +19,7 @@ public class AnnotatedClass {
   private final Class clazz;
   private final List<String> excludedFields;
   private final Iterable<Class<? extends Annotation>> relevantAnnotationClasses;
+  private final boolean outputValidationGroups;
 
   /**
    * @param clazz                     wrapped class
@@ -27,10 +28,27 @@ public class AnnotatedClass {
    *                                  AnnotatedClass#extractValidationRules()} is invoked
    */
   AnnotatedClass(Class clazz, List<String> excludedFields, Iterable<Class<? extends Annotation>>
-    relevantAnnotationClasses) {
+          relevantAnnotationClasses) {
     this.clazz = clazz;
     this.excludedFields = excludedFields;
     this.relevantAnnotationClasses = relevantAnnotationClasses;
+    this.outputValidationGroups = false;
+  }
+
+  /**
+   * @param clazz                     wrapped class
+   * @param excludedFields            collection of fully qualified field names which are skipped by the parser
+   * @param relevantAnnotationClasses only these annotation classes are considered when {@link
+   *                                  AnnotatedClass#extractValidationRules()} is invoked
+   * @param outputValidationGroups    Whether to output the value of the validation groups attribute of the validation
+   *                                  annotations.
+   */
+  AnnotatedClass(Class clazz, List<String> excludedFields, Iterable<Class<? extends Annotation>>
+    relevantAnnotationClasses, boolean outputValidationGroups) {
+    this.clazz = clazz;
+    this.excludedFields = excludedFields;
+    this.relevantAnnotationClasses = relevantAnnotationClasses;
+    this.outputValidationGroups = outputValidationGroups;
   }
 
   /**
@@ -45,7 +63,7 @@ public class AnnotatedClass {
     for (Field field : allFields) {
       if (isNotExcluded(field)) {
         FieldConstraints fieldValidationRules = new AnnotatedField(field,
-          relevantAnnotationClasses).extractValidationRules();
+          relevantAnnotationClasses, outputValidationGroups).extractValidationRules();
         if (fieldValidationRules.size() > 0) {
           classConstraints.put(field.getName(), fieldValidationRules);
         }

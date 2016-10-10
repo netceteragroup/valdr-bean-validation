@@ -12,11 +12,13 @@ import com.github.valdr.model.e.TestModelClassWithLotsOfIrrelevantAnnotations;
 import com.github.valdr.model.f.TestModelWithHibernateEmailAnnotation;
 import com.github.valdr.model.g.TestModelWithHibernateUrlAnnotation;
 import com.github.valdr.model.h.TestModelWithPatterns;
+import com.github.valdr.model.j.TestModelWithValidationGroups;
 import com.github.valdr.model.validation.CustomValidation;
 import com.google.common.collect.Lists;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -218,10 +220,57 @@ public class ConstraintParserTest {
     assertThat(json, containsString("/\\\\\\\\abc\\\\./")); // JSON needs to escape \ -> double escape here
   }
 
+  @Test
+  public void shouldIncludeValidationGroupWhenSoConfigured() {
+    // given
+    parserConfiguredFor(Lists.newArrayList(TestModelWithValidationGroups.class.getPackage().getName()), true, Arrays.asList("com.github.valdr.util"));
+    // when
+    String json = parser.parse();
+    // then
+    String expected = "{\n" +
+            "  \"TestModelWithValidationGroups\" : {\n" +
+            "    \"oneAndOnePointOne\" : {\n" +
+            "      \"required\" : {\n" +
+            "        \"message\" : \"{javax.validation.constraints.NotNull.message}\",\n" +
+            "        \"groups\" : [ \"GroupOne\", \"GroupOnePointOne\" ]\n" +
+            "      }\n" +
+            "    },\n" +
+            "    \"justTwo\" : {\n" +
+            "      \"required\" : {\n" +
+            "        \"message\" : \"{javax.validation.constraints.NotNull.message}\",\n" +
+            "        \"groups\" : [ \"GroupTwo\" ]\n" +
+            "      }\n" +
+            "    },\n" +
+            "    \"noGroupSpecifiedMeansDefault\" : {\n" +
+            "      \"required\" : {\n" +
+            "        \"message\" : \"{javax.validation.constraints.NotNull.message}\",\n" +
+            "        \"groups\" : [ \"GroupTwo\", \"Default\", \"GroupOne\", \"GroupOnePointOne\" ]\n" +
+            "      }\n" +
+            "    },\n" +
+            "    \"twoAndOneAndOnePointOne\" : {\n" +
+            "      \"required\" : {\n" +
+            "        \"message\" : \"{javax.validation.constraints.NotNull.message}\",\n" +
+            "        \"groups\" : [ \"GroupTwo\", \"GroupOne\", \"GroupOnePointOne\" ]\n" +
+            "      }\n" +
+            "    }\n" +
+            "  }\n" +
+            "}";
+    assertThat(json, is(expected));
+  }
+
+
   private void parserConfiguredFor(List<String> modelPackages, List<String> customAnnotationClasses) {
     Options options = new Options();
     options.setModelPackages(modelPackages);
     options.setCustomAnnotationClasses(customAnnotationClasses);
+    parser = new ConstraintParser(options);
+  }
+
+  private void parserConfiguredFor(List<String> modelPackages, boolean outputValidationGroups, List<String> validationGroupPackages) {
+    Options options = new Options();
+    options.setModelPackages(modelPackages);
+    options.setValidationGroupPackages(validationGroupPackages);
+    options.setOutputValidationGroups(outputValidationGroups);
     parser = new ConstraintParser(options);
   }
 
