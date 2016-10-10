@@ -19,6 +19,7 @@ the new AngularJS Model Validator.
     - [Servlet](#servlet)
   - [Dependency on valdr](#dependency-on-valdr)
   - [Mapping of Bean Validation constraints to valdr constraints](#mapping-of-bean-validation-constraints-to-valdr-constraints)
+  - [Including validation group information in the generated JSON](#including-validation-group-information-in-the-generated-json)
   - [Support](#support)
   - [License](#license)
 
@@ -147,13 +148,13 @@ To generate group information set the following two parameters:
 * outputValidationGroups: true
 * validationGroupPackages: [<an array of fully qualified names of packages containing your validation group interfaces>]
 
-The generated JSON will include for each constraint the value of the '''groups''' attribute of the constraint with the inheritance
+The generated JSON will include for each constraint the value of the ```groups``` attribute of the constraint with the inheritance
 hierarchy of the validation group marker interfaces expanded. If a constraint does not have the groups attribute specified,
 the default value is considered to be javax.validation.Default.class, and the groups array in the generated JSON will contain "Default" and
 all your interfaces extending javax.validation.Default and belonging to one of the packages in validationGroupPackages.
 
 When given
-'''java
+```java
 public interface Draft extends Default {
 }
 public interface Published extends Draft {
@@ -167,11 +168,11 @@ private String mandatoryForDraft;
 
 @NotNull(groups = {Published.class})
 private String mandatoryForPublished;
-'''
+```
 
 The generated JSON will include
 
-'''JSON
+```JSON
 mandatoryForAll:
   required:
     groups: ["Published", "Draft", "Default"]
@@ -182,7 +183,7 @@ mandatoryForAll:
 mandatoryForPublished:
   required:
     groups: ["Published"]
-'''
+```
 
 
 ## Support
