@@ -43,6 +43,8 @@ client start or on-demand)
   - whether to output simple or full type names
   - the output file name (CLI only)
   - CORS `Access-Control-Allow-Origin` HTTP header value (Servlet only)
+  - whether to output JSR-303 validation groups
+  - which packages to scan for validation group marker interfaces
 - Servlet offers built-in [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) support
 
 ## Use
@@ -136,6 +138,52 @@ The [BuiltInConstraint.java](https://github.com/netceteragroup/valdr-bean-valida
 | [Past](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Past.html) | [past](https://github.com/netceteragroup/valdr#future--past) |  |
 | [Email](https://docs.jboss.org/hibernate/validator/5.1/api/org/hibernate/validator/constraints/Email.html) |[email](https://github.com/netceteragroup/valdr#email) | proprietary Hibernate Validator (not in Bean Validation spec) |
 | [URL](https://docs.jboss.org/hibernate/validator/5.1/api/org/hibernate/validator/constraints/URL.html) |[url](https://github.com/netceteragroup/valdr#url) | proprietary Hibernate Validator (not in Bean Validation spec) |
+
+## Including validation group information in the generated JSON
+
+Validation groups allow you to enforce a different set of validation constraints in different situations.
+
+To generate group information set the following two parameters:
+* outputValidationGroups: true
+* validationGroupPackages: [<an array of fully qualified names of packages containing your validation group interfaces>]
+
+The generated JSON will include for each constraint the value of the '''groups''' attribute of the constraint with the inheritance
+hierarchy of the validation group marker interfaces expanded. If a constraint does not have the groups attribute specified,
+the default value is considered to be javax.validation.Default.class, and the groups array in the generated JSON will contain "Default" and
+all your interfaces extending javax.validation.Default and belonging to one of the packages in validationGroupPackages.
+
+When given
+'''java
+public interface Draft extends Default {
+}
+public interface Published extends Draft {
+}
+...
+@NotNull
+private String mandatoryForAll;
+
+@NotNull(groups = Draft.class)
+private String mandatoryForDraft;
+
+@NotNull(groups = {Published.class})
+private String mandatoryForPublished;
+'''
+
+The generated JSON will include
+
+'''JSON
+mandatoryForAll:
+  required:
+    groups: ["Published", "Draft", "Default"]
+mandatoryForAll:
+  required:
+    groups: ["Published", "Draft"]
+...
+mandatoryForPublished:
+  required:
+    groups: ["Published"]
+'''
+
 
 ## Support
 
