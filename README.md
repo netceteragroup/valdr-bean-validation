@@ -176,6 +176,7 @@ The generated JSON will include
 mandatoryForAll:
   required:
     groups: ["Published", "Draft", "Default"]
+...
 mandatoryForAll:
   required:
     groups: ["Published", "Draft"]
