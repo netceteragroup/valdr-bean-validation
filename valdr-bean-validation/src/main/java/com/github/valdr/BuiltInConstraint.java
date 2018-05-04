@@ -3,13 +3,13 @@ package com.github.valdr;
 import com.github.valdr.decorator.AbstractConstraintAttributesDecorator;
 import com.github.valdr.decorator.NullDecorator;
 import com.github.valdr.decorator.PatternDecorator;
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
-import lombok.Getter;
-import lombok.SneakyThrows;
-import org.hibernate.validator.constraints.Email;
+
+import java.lang.annotation.Annotation;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -17,8 +17,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.lang.annotation.Annotation;
-import java.util.Arrays;
+
+import lombok.Getter;
+import lombok.SneakyThrows;
 
 /**
  * All constraints currently supported out-of-the-box by valdr Bean Validation. Each value represents a constraint
@@ -28,10 +29,16 @@ import java.util.Arrays;
 public enum BuiltInConstraint {
 
   // CHECKSTYLE:OFF
-  REQUIRED("required", NotNull.class), MIN("min", Min.class), MAX("max", Max.class), SIZE("size", Size.class),
-  DIGITS("digits", Digits.class), PATTERN("pattern", Pattern.class, PatternDecorator.class), FUTURE("future",
-    Future.class), PAST("past", Past.class), EMAIL("hibernateEmail", Email.class), URL("hibernateUrl",
-    org.hibernate.validator.constraints.URL.class);
+  REQUIRED("required", NotNull.class),
+  MIN("min", Min.class),
+  MAX("max", Max.class),
+  SIZE("size", Size.class),
+  DIGITS("digits", Digits.class),
+  PATTERN("pattern", Pattern.class, PatternDecorator.class),
+  FUTURE("future", Future.class),
+  PAST("past", Past.class),
+  EMAIL("email", Email.class),
+  URL("hibernateUrl", org.hibernate.validator.constraints.URL.class);
   // CHECKSTYLE:ON
 
   @Getter
@@ -39,12 +46,12 @@ public enum BuiltInConstraint {
   private final Class<? extends AbstractConstraintAttributesDecorator> decorator;
   private final String camelCaseName;
 
-  private BuiltInConstraint(String camelCaseName, Class<? extends Annotation> beanValidationAnnotation) {
+  BuiltInConstraint(String camelCaseName, Class<? extends Annotation> beanValidationAnnotation) {
     this(camelCaseName, beanValidationAnnotation, NullDecorator.class);
   }
 
-  private BuiltInConstraint(String camelCaseName, Class<? extends Annotation> beanValidationAnnotation,
-                            Class<? extends AbstractConstraintAttributesDecorator> decorator) {
+  BuiltInConstraint(String camelCaseName, Class<? extends Annotation> beanValidationAnnotation,
+    Class<? extends AbstractConstraintAttributesDecorator> decorator) {
     this.camelCaseName = camelCaseName;
     this.decorator = decorator;
     this.beanValidationAnnotation = beanValidationAnnotation;
@@ -72,16 +79,12 @@ public enum BuiltInConstraint {
    * @return all collected annotation classes
    */
   public static Iterable<Class<? extends Annotation>> getAllBeanValidationAnnotations() {
-    return Iterables.transform(Arrays.asList(values()), new Function<BuiltInConstraint, Class<? extends Annotation>>() {
-
-      @Override
-      public Class<? extends Annotation> apply(BuiltInConstraint input) {
-        if (input == null) {
-          throw new NullPointerException("Passed validator must not be null.");
-        }
-        return input.getBeanValidationAnnotation();
+    return Arrays.stream(values()).map(input -> {
+      if (input == null) {
+        throw new NullPointerException("Passed validator must not be null.");
       }
-    });
+      return input.getBeanValidationAnnotation();
+    }).collect(Collectors.toList());
   }
 
   /**

@@ -1,17 +1,17 @@
 package com.github.valdr;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.Is.is;
@@ -19,7 +19,6 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.mock;
-import static org.mockito.Matchers.contains;
 
 /**
  * Tests ValidationRulesServlet.
@@ -120,8 +119,8 @@ public class ValidationRulesServletTest {
   private String createTempFile(String string) throws IOException {
     File tempFile = File.createTempFile("valdr", "json");
     FileWriter writer = new FileWriter(tempFile);
-    IOUtils.write(string, writer);
-    IOUtils.closeQuietly(writer);
+    writer.write(string);
+    writer.close();
     return tempFile.getAbsolutePath();
   }
 }
