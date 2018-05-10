@@ -1,6 +1,6 @@
 language: java
 jdk:
-- oraclejdk8
+- oraclejdk9
 after_success:
 - mvn -pl :valdr-bean-validation clean test jacoco:report coveralls:jacoco
 env:
