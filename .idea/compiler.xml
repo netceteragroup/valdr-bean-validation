@@ -29,9 +29,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="valdr-bean-validation" target="9" />
-      <module name="valdr-bean-validation-demo" target="9" />
-      <module name="valdr-bean-validation-parent" target="9" />
+      <module name="valdr-bean-validation" target="1.8" />
+      <module name="valdr-bean-validation-demo" target="1.8" />
+      <module name="valdr-bean-validation-parent" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

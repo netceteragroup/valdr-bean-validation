@@ -79,8 +79,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <source.version>9</source.version>
-    <target.version>9</target.version>
+    <source.version>1.8</source.version>
+    <target.version>1.8</target.version>
 
     <!-- plugin versions -->
     <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
