@@ -44,7 +44,7 @@
       <artifactId>commons-io</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.hibernate</groupId>
+      <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
     </dependency>
 
@@ -69,6 +69,11 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -108,7 +113,7 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.7.0.201403182114</version>
+        <version>0.8.1</version>
         <configuration>
           <excludes>
             <exclude>com/github/valdr/thirdparty/**/*.class</exclude>

@@ -2,14 +2,16 @@ package com.github.valdr;
 
 import com.github.valdr.cli.ValdrBeanValidation;
 import com.github.valdr.util.SysOutSlurper;
-import lombok.SneakyThrows;
+
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+
+import lombok.SneakyThrows;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
@@ -73,8 +75,7 @@ public class ValdrBeanValidationTest {
       ValdrBeanValidation.main(args);
     } catch (Exception e) {
       // expect
-      assertThat(e.getClass().getName().toString(), is(Options.InvalidConfigurationException.class.getName().toString
-        ()));
+      assertThat(e.getClass().getName(), is(Options.InvalidConfigurationException.class.getName()));
     }
   }
 
@@ -112,14 +113,14 @@ public class ValdrBeanValidationTest {
     ValdrBeanValidation.main(args);
 
     // then
-    assertThat(FileUtils.readFileToString(outputTempFile), is("{ }"));
+    assertThat(FileUtils.readFileToString(outputTempFile, Charset.defaultCharset()), is("{ }"));
   }
 
   private String createTempFile(String string) throws IOException {
     File tempFile = File.createTempFile("valdr", "json");
     FileWriter writer = new FileWriter(tempFile);
-    IOUtils.write(string, writer);
-    IOUtils.closeQuietly(writer);
+    writer.write(string);
+    writer.close();
     return tempFile.getAbsolutePath();
   }
 

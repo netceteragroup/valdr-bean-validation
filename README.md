@@ -126,15 +126,15 @@ The [BuiltInConstraint.java](https://github.com/netceteragroup/valdr-bean-valida
 
 | Bean Validation | valdr | Comment |
 |-----------------|-------|---------|
-| [NotNull](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/NotNull.html) | [required](https://github.com/netceteragroup/valdr#required) |  |
-| [Min](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Min.html) | [min](https://github.com/netceteragroup/valdr#min--max) |  |
-| [Max](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Max.html) | [max](https://github.com/netceteragroup/valdr#min--max) |  |
-| [Size](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Size.html) | [size](https://github.com/netceteragroup/valdr#size) |  |
-| [Digits](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Digits.html) | [digits](https://github.com/netceteragroup/valdr#digits) |  |
-| [Pattern](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Pattern.html) | [pattern](https://github.com/netceteragroup/valdr#partern) | Java regex pattern is transformed to JavaScript pattern |
-| [Future](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Future.html) | [future](https://github.com/netceteragroup/valdr#future--past) |  |
-| [Past](http://docs.oracle.com/javaee/7/api/javax/validation/constraints/Past.html) | [past](https://github.com/netceteragroup/valdr#future--past) |  |
-| [Email](https://docs.jboss.org/hibernate/validator/5.1/api/org/hibernate/validator/constraints/Email.html) |[email](https://github.com/netceteragroup/valdr#email) | proprietary Hibernate Validator (not in Bean Validation spec) |
+| [NotNull](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/NotNull.html) | [required](https://github.com/netceteragroup/valdr#required) |  |
+| [Min](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Min.html) | [min](https://github.com/netceteragroup/valdr#min--max) |  |
+| [Max](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Max.html) | [max](https://github.com/netceteragroup/valdr#min--max) |  |
+| [Size](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Size.html) | [size](https://github.com/netceteragroup/valdr#size) |  |
+| [Digits](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Digits.html) | [digits](https://github.com/netceteragroup/valdr#digits) |  |
+| [Pattern](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Pattern.html) | [pattern](https://github.com/netceteragroup/valdr#partern) | Java regex pattern is transformed to JavaScript pattern |
+| [Future](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Future.html) | [future](https://github.com/netceteragroup/valdr#future--past) |  |
+| [Past](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Past.html) | [past](https://github.com/netceteragroup/valdr#future--past) |  |
+| [Email](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Email.html) |[email](https://github.com/netceteragroup/valdr#email) |  |
 | [URL](https://docs.jboss.org/hibernate/validator/5.1/api/org/hibernate/validator/constraints/URL.html) |[url](https://github.com/netceteragroup/valdr#url) | proprietary Hibernate Validator (not in Bean Validation spec) |
 
 ## Support

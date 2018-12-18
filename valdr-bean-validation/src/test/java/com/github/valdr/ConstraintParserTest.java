@@ -9,7 +9,7 @@ import com.github.valdr.model.c.TestModelWithASingleAnnotatedMemberWithCustomMes
 import com.github.valdr.model.d.SubClassWithNoValidatedMembers;
 import com.github.valdr.model.d.SuperClassWithValidatedMember;
 import com.github.valdr.model.e.TestModelClassWithLotsOfIrrelevantAnnotations;
-import com.github.valdr.model.f.TestModelWithHibernateEmailAnnotation;
+import com.github.valdr.model.f.TestModelWithEmailAnnotation;
 import com.github.valdr.model.g.TestModelWithHibernateUrlAnnotation;
 import com.github.valdr.model.h.TestModelWithPatterns;
 import com.github.valdr.model.validation.CustomValidation;
@@ -155,16 +155,16 @@ public class ConstraintParserTest {
    * See method name.
    */
   @Test
-  public void shouldSupportHibernateEmailAnnotation() {
+  public void shouldSupportEmailAnnotation() {
     // given
-    parserConfiguredFor(Lists.newArrayList(TestModelWithHibernateEmailAnnotation.class.getPackage().getName()),
+    parserConfiguredFor(Lists.newArrayList(TestModelWithEmailAnnotation.class.getPackage().getName()),
       emptyStringList());
     // when
     String json = parser.parse();
     // then
-    assertThat(json, containsString(TestModelWithHibernateEmailAnnotation.class.getSimpleName()));
-    assertThat(json, containsString("hibernateEmail"));
-    assertThat(json, containsString("{org.hibernate.validator.constraints.Email.message}"));
+    assertThat(json, containsString(TestModelWithEmailAnnotation.class.getSimpleName()));
+    assertThat(json, containsString("email"));
+    assertThat(json, containsString("{javax.validation.constraints.Email.message}"));
   }
 
   /**
