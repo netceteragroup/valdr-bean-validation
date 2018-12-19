@@ -17,9 +17,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Parses classes in defined packages for supported <a href="http://beanvalidation.org/">Bean Validation (JSR 303)</a>
- * annotations ({@code javax.validation.*}) and configured custom annotations. The parsing result is a
- * JSON string that complies with the document specified by <a href="https://github.com/netceteragroup/valdr">valdr</a>.
+ * <p> Parses classes in defined packages for supported <a href="http://beanvalidation.org/">Bean Validation (JSR
+ * 303)</a>
+ * annotations ({@code javax.validation.*}) and configured custom annotations.
+ * <p> The parsing result is a JSON string that complies with the document specified by <a
+ * href="https://github.com/netceteragroup/valdr">valdr</a>.
  *
  * @see BuiltInConstraint
  * @see Options
