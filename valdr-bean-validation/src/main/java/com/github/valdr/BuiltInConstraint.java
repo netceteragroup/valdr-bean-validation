@@ -22,9 +22,9 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 
 /**
- * All constraints currently supported out-of-the-box by valdr Bean Validation. Each value represents a constraint
- * that valdr provides an implementation for (JavaScript). The {@code toString()} method is guaranteed to return the
- * validator name as expected by valdr.
+ * <p> All constraints currently supported out-of-the-box by valdr Bean Validation.
+ * <p> Each value represents a constraint that valdr provides an implementation for (JavaScript).
+ * <p> The {@code toString()} method is guaranteed to return the validator name as expected by valdr.
  */
 public enum BuiltInConstraint {
 
