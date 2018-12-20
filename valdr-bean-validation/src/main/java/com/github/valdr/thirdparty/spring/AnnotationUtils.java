@@ -62,6 +62,7 @@ public abstract class AnnotationUtils {
    * is not declared locally on the supplied element.
    * @param ae the Method, Constructor or Field from which to get the annotation
    * @param annotationType the annotation class to look for, both locally and as a meta-annotation
+   * @param <T> annotation type
    * @return the matching annotation or {@code null} if not found
    * @since 3.1
    */
@@ -84,6 +85,7 @@ public abstract class AnnotationUtils {
    * <p>Annotations on methods are not inherited by default, so we need to handle this explicitly.
    * @param method the method to look for annotations on
    * @param annotationType the annotation class to look for
+   * @param <A> annotation type
    * @return the annotation found, or {@code null} if none found
    */
   public static <A extends Annotation> A findAnnotation(Method method, Class<A> annotationType) {
@@ -161,6 +163,7 @@ public abstract class AnnotationUtils {
    * hierarchy if no match is found.
    * @param clazz the class to look for annotations on
    * @param annotationType the annotation class to look for
+   * @param <A> annotation type
    * @return the annotation found, or {@code null} if none found
    */
   public static <A extends Annotation> A findAnnotation(Class<?> clazz, Class<A> annotationType) {

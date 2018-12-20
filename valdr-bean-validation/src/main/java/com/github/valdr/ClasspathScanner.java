@@ -19,7 +19,6 @@ import java.util.Set;
  * Provides means to scan the classpath for model classes that need to be parsed for constraint annotations.
  */
 public class ClasspathScanner {
-  private final Logger logger = LoggerFactory.getLogger(ClasspathScanner.class);
   private final Options options;
 
   /**
@@ -35,8 +34,7 @@ public class ClasspathScanner {
    * Scans the classpath to find all classes that are in the configured model packages. It ignores excluded classes.
    *
    * @return classes to parse
-   * @see com.github.valdr.Options#getModelPackages()
-   * @see com.github.valdr.Options#getExcludedClasses()
+   * @see Options
    */
   public Set<Class<?>> findClassesToParse() {
     Reflections reflections = new Reflections(new ConfigurationBuilder().

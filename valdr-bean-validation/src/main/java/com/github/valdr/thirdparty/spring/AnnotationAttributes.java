@@ -72,6 +72,7 @@ public class AnnotationAttributes extends LinkedHashMap<String, Object> {
    * wrapping the map with the {@link #AnnotationAttributes(java.util.Map)} constructor.
    *
    * @param map original source of annotation attribute key/value pairs
+   * @return annotation attributes
    */
   public static AnnotationAttributes fromMap(Map<String, Object> map) {
     if (map == null) {

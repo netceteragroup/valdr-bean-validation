@@ -22,9 +22,9 @@ import java.io.Writer;
  * Command line client to print the Bean Validation JSON model to system out or a defined output file. Usage is as
  * follows:
  * <pre>
- * java ValdrBeanValidation [-cf <arg>]
+ * {@code java ValdrBeanValidation [-cf <arg>]
  *   -cf <arg>   path to JSON configuration file, if omitted valdr-bean-validation.json is expected at root of class
- *   path
+ *   path }
  * </pre>
  *
  * @see Options
