@@ -100,7 +100,7 @@
     <hamcrest.version>1.3</hamcrest.version>
     <hibernate.version>1.0.2</hibernate.version> <!-- JPA 2.1 for tests -->
     <hibernate-validator.version>6.0.9.Final</hibernate-validator.version>
-    <jackson.version>2.9.5</jackson.version>
+    <jackson.version>2.9.8</jackson.version>
     <junit.version>4.12</junit.version>
     <lombok.version>1.16.20</lombok.version>
     <mockito.version>2.18.3</mockito.version>
