@@ -1,7 +1,6 @@
-dist: trusty
 language: java
 jdk:
-- oraclejdk8
+- openjdk8
 after_success:
 - mvn -pl :valdr-bean-validation clean test jacoco:report coveralls:jacoco
 env:
