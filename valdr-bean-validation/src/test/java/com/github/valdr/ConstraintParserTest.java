@@ -71,7 +71,7 @@ public class ConstraintParserTest {
       "  \"" + TestModelWithASingleAnnotatedMember.class.getSimpleName() + "\" : {" + LS +
       "    \"notNullString\" : {" + LS +
       "      \"required\" : {" + LS +
-      "        \"message\" : \"{javax.validation.constraints.NotNull.message}\"" + LS +
+      "        \"message\" : \"{jakarta.validation.constraints.NotNull.message}\"" + LS +
       "      }" + LS +
       "    }" + LS +
       "  }" + LS +
@@ -164,7 +164,7 @@ public class ConstraintParserTest {
     // then
     assertThat(json, containsString(TestModelWithEmailAnnotation.class.getSimpleName()));
     assertThat(json, containsString("email"));
-    assertThat(json, containsString("{javax.validation.constraints.Email.message}"));
+    assertThat(json, containsString("{jakarta.validation.constraints.Email.message}"));
   }
 
   /**
@@ -198,9 +198,9 @@ public class ConstraintParserTest {
     JsonNode jsonNode = new ObjectMapper().readTree(json);
     // then
     assertThat(jsonNode.get(SuperClassWithValidatedMember.class.getSimpleName()).get("notNullString").get("required")
-      .get("message").asText(), is("{javax.validation.constraints.NotNull.message}"));
+      .get("message").asText(), is("{jakarta.validation.constraints.NotNull.message}"));
     assertThat(jsonNode.get(SubClassWithNoValidatedMembers.class.getSimpleName()).get("notNullString").get
-      ("required").get("message").asText(), is("{javax.validation.constraints.NotNull.message}"));
+      ("required").get("message").asText(), is("{jakarta.validation.constraints.NotNull.message}"));
   }
 
   /**

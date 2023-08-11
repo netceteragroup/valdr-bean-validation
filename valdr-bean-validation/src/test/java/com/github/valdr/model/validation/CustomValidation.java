@@ -1,7 +1,7 @@
 package com.github.valdr.model.validation;
 
 
-import javax.validation.Constraint;
+import jakarta.validation.Constraint;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

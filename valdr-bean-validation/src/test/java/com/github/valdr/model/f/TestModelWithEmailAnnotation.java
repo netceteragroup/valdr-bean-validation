@@ -1,6 +1,6 @@
 package com.github.valdr.model.f;
 
-import javax.validation.constraints.Email;
+import jakarta.validation.constraints.Email;
 
 public class TestModelWithEmailAnnotation {
   @Email

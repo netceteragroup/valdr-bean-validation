@@ -10,8 +10,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.Is.is;

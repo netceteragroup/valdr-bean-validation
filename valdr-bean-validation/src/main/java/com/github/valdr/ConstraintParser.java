@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * <p> Parses classes in defined packages for supported <a href="http://beanvalidation.org/">Bean Validation (JSR
  * 303)</a>
- * annotations ({@code javax.validation.*}) and configured custom annotations.
+ * annotations ({@code jakarta.validation.*}) and configured custom annotations.
  * <p> The parsing result is a JSON string that complies with the document specified by <a
  * href="https://github.com/netceteragroup/valdr">valdr</a>.
  *

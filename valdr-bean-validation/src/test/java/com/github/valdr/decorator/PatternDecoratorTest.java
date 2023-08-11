@@ -25,7 +25,7 @@ public class PatternDecoratorTest {
   @Test
   public void shouldStoreThePatternForValueAttribute() {
     /*
-     * javax.validation.constraints.Pattern uses the attribute 'regex' to define the pattern. However, for valdr the
+     * jakarta.validation.constraints.Pattern uses the attribute 'regex' to define the pattern. However, for valdr the
      * pattern must be passed in the 'value' attribute.
      */
     // given

@@ -1,6 +1,6 @@
 package com.github.valdr.model.h;
 
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.Pattern;
 
 public class TestModelWithPatterns {
   @Pattern(regexp = "abc")
