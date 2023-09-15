@@ -1,14 +1,14 @@
 package com.github.valdr.decorator;
 
 import com.github.valdr.ConstraintAttributes;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -25,7 +25,7 @@ public class PatternDecoratorTest {
   @Test
   public void shouldStoreThePatternForValueAttribute() {
     /*
-     * javax.validation.constraints.Pattern uses the attribute 'regex' to define the pattern. However, for valdr the
+     * jakarta.validation.constraints.Pattern uses the attribute 'regex' to define the pattern. However, for valdr the
      * pattern must be passed in the 'value' attribute.
      */
     // given

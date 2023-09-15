@@ -20,8 +20,8 @@
       <artifactId>reflections</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -50,8 +50,8 @@
 
     <!-- provided -->
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -62,8 +62,8 @@
 
     <!-- test -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -83,7 +83,7 @@
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest-library</artifactId>
+      <artifactId>hamcrest</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -92,8 +92,13 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.hibernate.javax.persistence</groupId>
-      <artifactId>hibernate-jpa-2.1-api</artifactId>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -113,7 +118,6 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.1</version>
         <configuration>
           <excludes>
             <exclude>com/github/valdr/thirdparty/**/*.class</exclude>

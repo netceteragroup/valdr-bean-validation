@@ -1,7 +1,7 @@
 package com.github.valdr;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -10,13 +10,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.mock;
 
@@ -30,8 +30,8 @@ public class ValidationRulesServletTest {
   private MockHttpServletResponse response;
   private MockHttpServletRequest request;
 
-  @Before
-  public void setUp() throws Exception {
+  @BeforeEach
+  public void setUp() {
     servletConfig = mock(ServletConfig.class);
     response = new MockHttpServletResponse();
     request = new MockHttpServletRequest();

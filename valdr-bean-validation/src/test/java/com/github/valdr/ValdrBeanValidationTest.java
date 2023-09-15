@@ -4,7 +4,6 @@ import com.github.valdr.cli.ValdrBeanValidation;
 import com.github.valdr.util.SysOutSlurper;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,11 +11,12 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 
 import lombok.SneakyThrows;
+import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Tests ValdrBeanValidation.

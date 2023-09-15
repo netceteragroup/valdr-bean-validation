@@ -14,16 +14,16 @@ import com.github.valdr.model.g.TestModelWithHibernateUrlAnnotation;
 import com.github.valdr.model.h.TestModelWithPatterns;
 import com.github.valdr.model.validation.CustomValidation;
 import com.google.common.collect.Lists;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.startsWith;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.StringContains.containsString;
+import static org.hamcrest.core.StringStartsWith.startsWith;
 
 public class ConstraintParserTest {
   private static final String LS = System.getProperty("line.separator");
@@ -71,7 +71,7 @@ public class ConstraintParserTest {
       "  \"" + TestModelWithASingleAnnotatedMember.class.getSimpleName() + "\" : {" + LS +
       "    \"notNullString\" : {" + LS +
       "      \"required\" : {" + LS +
-      "        \"message\" : \"{javax.validation.constraints.NotNull.message}\"" + LS +
+      "        \"message\" : \"{jakarta.validation.constraints.NotNull.message}\"" + LS +
       "      }" + LS +
       "    }" + LS +
       "  }" + LS +
@@ -164,7 +164,7 @@ public class ConstraintParserTest {
     // then
     assertThat(json, containsString(TestModelWithEmailAnnotation.class.getSimpleName()));
     assertThat(json, containsString("email"));
-    assertThat(json, containsString("{javax.validation.constraints.Email.message}"));
+    assertThat(json, containsString("{jakarta.validation.constraints.Email.message}"));
   }
 
   /**
@@ -198,9 +198,9 @@ public class ConstraintParserTest {
     JsonNode jsonNode = new ObjectMapper().readTree(json);
     // then
     assertThat(jsonNode.get(SuperClassWithValidatedMember.class.getSimpleName()).get("notNullString").get("required")
-      .get("message").asText(), is("{javax.validation.constraints.NotNull.message}"));
+      .get("message").asText(), is("{jakarta.validation.constraints.NotNull.message}"));
     assertThat(jsonNode.get(SubClassWithNoValidatedMembers.class.getSimpleName()).get("notNullString").get
-      ("required").get("message").asText(), is("{javax.validation.constraints.NotNull.message}"));
+      ("required").get("message").asText(), is("{jakarta.validation.constraints.NotNull.message}"));
   }
 
   /**

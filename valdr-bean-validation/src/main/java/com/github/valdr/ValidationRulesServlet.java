@@ -7,11 +7,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,7 +24,7 @@ import java.io.PrintWriter;
  * custom Bean Validation annotations. The Servlet then builds and returns a JSON document with all validation rules
  * (i.e. Bean Validation constraints). The JSON document adheres to structure specified by valdr.</p>
  *
- * Servlet can be configured using following {@link javax.servlet.ServletConfig} init parameters (* = mandatory):
+ * Servlet can be configured using following {@link jakarta.servlet.ServletConfig} init parameters (* = mandatory):
  * <ul>
  * <li>configFile: path to JSON configuration file, if omitted valdr-bean-validation.json is expected at root of class
  * path</li>

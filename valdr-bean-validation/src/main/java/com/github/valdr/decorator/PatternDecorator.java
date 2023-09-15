@@ -7,7 +7,7 @@ import java.util.Set;
 import com.github.valdr.ConstraintAttributes;
 
 /**
- * Decorates the map of attributes of the {@link javax.validation.constraints.Pattern} constraint.
+ * Decorates the map of attributes of the {@link jakarta.validation.constraints.Pattern} constraint.
  */
 public class PatternDecorator extends AbstractConstraintAttributesDecorator {
 

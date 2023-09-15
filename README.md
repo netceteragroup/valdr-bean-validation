@@ -5,8 +5,7 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.valdr/valdr-bean-validation/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.valdr/valdr-bean-validation/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/netceteragroup/valdr-bean-validation/blob/master/LICENSE)
 
-[Bean Validation](http://beanvalidation.org/) (JSR 303) plugin for [valdr](https://github.com/netceteragroup/valdr),
-the new AngularJS Model Validator.
+[Bean Validation](http://beanvalidation.org/) (JSR 303) plugin for [valdr](https://github.com/netceteragroup/valdr)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -27,13 +26,13 @@ the new AngularJS Model Validator.
 
 valdr Bean Validation parses Java model classes for Bean Validation constraints (aka JSR 303 annotations)
 and extracts their information into a [JSON document to be used by valdr](https://github.com/netceteragroup/valdr#constraints-json). This allows to apply the exact same
-validation rules on the server and on the AngularJS client.
+validation rules on the server and on the client.
 
 ## Features
 
 - _offline use:_ CLI client which can be integrated into build process to produce static valdr JSON which is packaged
 and delivered with the web application
-- _online use:_ Servlet which parses model classes at runtime and sends JSON back to AngularJS client (e.g. during
+- _online use:_ Servlet which parses model classes at runtime and sends JSON back to the client (e.g. during
 client start or on-demand)
 - both Servlet and CLI client support a number of [config options](https://github.com/netceteragroup/valdr-bean-validation/blob/master/valdr-bean-validation-demo/src/main/resources/valdr-bean-validation.json)
   - list of packages to scan
