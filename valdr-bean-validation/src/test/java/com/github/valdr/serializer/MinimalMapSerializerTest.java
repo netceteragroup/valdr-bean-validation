@@ -5,16 +5,16 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.github.valdr.MinimalMap;
 import lombok.Value;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 /**
  * Tests {@link MinimalMapSerializer}.
@@ -26,7 +26,7 @@ public class MinimalMapSerializerTest {
   /**
    * Initializes the map.
    */
-  @Before
+  @BeforeEach
   public void setup() {
     attributeMap = new TestMinimalMap();
   }

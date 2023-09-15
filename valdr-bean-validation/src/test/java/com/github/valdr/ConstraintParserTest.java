@@ -14,16 +14,16 @@ import com.github.valdr.model.g.TestModelWithHibernateUrlAnnotation;
 import com.github.valdr.model.h.TestModelWithPatterns;
 import com.github.valdr.model.validation.CustomValidation;
 import com.google.common.collect.Lists;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.startsWith;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.StringContains.containsString;
+import static org.hamcrest.core.StringStartsWith.startsWith;
 
 public class ConstraintParserTest {
   private static final String LS = System.getProperty("line.separator");

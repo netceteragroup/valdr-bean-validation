@@ -5,14 +5,14 @@ import com.google.common.collect.Lists;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.junit.Test;
+import org.hamcrest.collection.IsEmptyCollection;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
 
 /**
@@ -30,7 +30,7 @@ public class ClasspathScannerTest {
     // when
     Set<Class<?>> classesToParse = classpathScanner.findClassesToParse();
     // then
-    assertThat(classesToParse, is(empty()));
+    assertThat(classesToParse, IsEmptyCollection.empty());
   }
 
   /**
@@ -43,7 +43,7 @@ public class ClasspathScannerTest {
     // when
     Set<Class<?>> classesToParse = classpathScanner.findClassesToParse();
     // then
-    assertThat(classesToParse, is(empty()));
+    assertThat(classesToParse, IsEmptyCollection.empty());
   }
 
   /**
