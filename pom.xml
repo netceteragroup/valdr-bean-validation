@@ -13,7 +13,7 @@
   <inceptionYear>2014</inceptionYear>
 
   <prerequisites>
-    <maven>3.5.2</maven>
+    <maven>3.9.4</maven>
   </prerequisites>
 
   <licenses>
