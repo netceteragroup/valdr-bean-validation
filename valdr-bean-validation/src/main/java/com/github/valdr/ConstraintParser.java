@@ -4,10 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.github.valdr.serializer.MinimalMapSerializer;
-import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import lombok.SneakyThrows;
-import org.reflections.ReflectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +13,7 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p> Parses classes in defined packages for supported <a href="http://beanvalidation.org/">Bean Validation (JSR
@@ -79,21 +78,20 @@ public class ConstraintParser {
     return ow.writeValueAsString(classNameToValidationRulesMap);
   }
 
+  @SuppressWarnings("unchecked")
   private Iterable<? extends Class<? extends Annotation>> getConfiguredCustomAnnotations() {
-    return Iterables.transform(options.getCustomAnnotationClasses(), new Function<String,
-      Class<? extends Annotation>>() {
-      @Override
-      @SuppressWarnings("unchecked")
-      public Class<? extends Annotation> apply(String className) {
-        Class<?> validatorClass = ReflectionUtils.forName(className);
-        if (validatorClass.isAnnotation()) {
-          return (Class<? extends Annotation>) validatorClass;
+    return options.getCustomAnnotationClasses().stream().map(className -> {
+      try {
+        Class<?> validatorClass = Class.forName(className);
+        if (!validatorClass.isAnnotation()) {
+          logger.warn("The configured custom annotation class '{}' is not an annotation. It will be ignored.", validatorClass);
         } else {
-          logger.warn("The configured custom annotation class '{}' is not an annotation. It will be ignored.",
-            validatorClass);
-          return null;
+          return (Class<? extends Annotation>) validatorClass;
         }
+      } catch (ClassNotFoundException e) {
+        logger.warn("The configured class '{}' can not be found. It will be ignored.", className);
       }
-    });
+      return null;
+    }).filter(Objects::nonNull).toList();
   }
 }

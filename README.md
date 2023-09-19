@@ -122,18 +122,18 @@ kind-of represents the "major" version.
 
 The [BuiltInConstraint.java](https://github.com/netceteragroup/valdr-bean-validation/blob/master/valdr-bean-validation/src/main/java/com/github/valdr/BuiltInConstraint.java) enum defines the mapping of Bean Validation constraints to valdr constraints.
 
-| Bean Validation | valdr | Comment |
-|-----------------|-------|---------|
-| [NotNull](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/NotNull.html) | [required](https://github.com/netceteragroup/valdr#required) |  |
-| [Min](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Min.html) | [min](https://github.com/netceteragroup/valdr#min--max) |  |
-| [Max](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Max.html) | [max](https://github.com/netceteragroup/valdr#min--max) |  |
-| [Size](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Size.html) | [size](https://github.com/netceteragroup/valdr#size) |  |
-| [Digits](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Digits.html) | [digits](https://github.com/netceteragroup/valdr#digits) |  |
-| [Pattern](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Pattern.html) | [pattern](https://github.com/netceteragroup/valdr#partern) | Java regex pattern is transformed to JavaScript pattern |
-| [Future](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Future.html) | [future](https://github.com/netceteragroup/valdr#future--past) |  |
-| [Past](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Past.html) | [past](https://github.com/netceteragroup/valdr#future--past) |  |
-| [Email](https://docs.jboss.org/hibernate/stable/beanvalidation/api/javax/validation/constraints/Email.html) |[email](https://github.com/netceteragroup/valdr#email) |  |
-| [URL](https://docs.jboss.org/hibernate/validator/5.1/api/org/hibernate/validator/constraints/URL.html) |[url](https://github.com/netceteragroup/valdr#url) | proprietary Hibernate Validator (not in Bean Validation spec) |
+| Bean Validation                                                                                                 | valdr | Comment |
+|-----------------------------------------------------------------------------------------------------------------|-------|---------|
+| [NotNull](https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/notnull) | [required](https://github.com/netceteragroup/valdr#required) |  |
+| [Min](https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/min)         | [min](https://github.com/netceteragroup/valdr#min--max) |  |
+| [Max](https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/max)         | [max](https://github.com/netceteragroup/valdr#min--max) |  |
+| [Size](https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/size)       | [size](https://github.com/netceteragroup/valdr#size) |  |
+| [Digits](https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/digits)   | [digits](https://github.com/netceteragroup/valdr#digits) |  |
+| [Pattern](https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/pattern) | [pattern](https://github.com/netceteragroup/valdr#partern) | Java regex pattern is transformed to JavaScript pattern |
+| [Future](https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/future)   | [future](https://github.com/netceteragroup/valdr#future--past) |  |
+| [Past](https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/past)       | [past](https://github.com/netceteragroup/valdr#future--past) |  |
+| [Email](https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/email)     |[email](https://github.com/netceteragroup/valdr#email) |  |
+| [URL](https://docs.jboss.org/hibernate/stable/validator/api/org/hibernate/validator/constraints/URL.html)       |[url](https://github.com/netceteragroup/valdr#url) | proprietary Hibernate Validator (not in Bean Validation spec) |
 
 ## Support
 
