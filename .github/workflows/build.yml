@@ -1,4 +1,4 @@
-name: Maven CI/CD
+name: Build
 
 on:
  push:
@@ -19,6 +19,6 @@ jobs:
         java-version: '17'
         distribution: 'zulu'
         cache: maven
-    
+
     - name: Build project with Maven
       run: mvn -B package --file pom.xml
