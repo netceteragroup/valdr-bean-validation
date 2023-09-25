@@ -109,11 +109,6 @@
         <groupId>org.eluder.coveralls</groupId>
         <artifactId>coveralls-maven-plugin</artifactId>
         <version>2.2.0</version>
-        <!--The Coveralls API token is made available as 'repoToken' env variable by Travis CI (see .travis.yml for secure-->
-        <!--env). If it weren't you could define it here and reference some property from your settings.xml.-->
-        <!--<configuration>-->
-          <!--<repoToken>${coveralls.valdr-bean-validation.token}</repoToken>-->
-        <!--</configuration>-->
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>

@@ -1,6 +1,6 @@
 # valdr Bean Validation
 
-[![Build Status](https://travis-ci.org/netceteragroup/valdr-bean-validation.svg?branch=master)](https://travis-ci.org/netceteragroup/valdr-bean-validation)
+[![Build Status](https://github.com/netceteragroup/valdr-bean-validation/actions/workflows/build.yml/badge.svg)](https://github.com/netceteragroup/valdr-bean-validation/actions/workflows/build.yml)
 [![Coverage Status](https://coveralls.io/repos/netceteragroup/valdr-bean-validation/badge.svg?branch=master)](https://coveralls.io/r/netceteragroup/valdr-bean-validation?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.valdr/valdr-bean-validation/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.valdr/valdr-bean-validation/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/netceteragroup/valdr-bean-validation/blob/master/LICENSE)

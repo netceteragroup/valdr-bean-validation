@@ -49,13 +49,15 @@
   </distributionManagement>
 
   <ciManagement>
-    <system>Travis CI</system>
-    <url>https://travis-ci.org/netceteragroup/valdr-bean-validation</url>
+    <system>GitHub Actions</system>
+    <url>https://github.com/netceteragroup/valdr-bean-validation/actions</url>
   </ciManagement>
+
   <issueManagement>
     <system>github</system>
     <url>https://github.com/netceteragroup/valdr-bean-validation/issues</url>
   </issueManagement>
+
   <scm>
     <url>https://github.com/netceteragroup/valdr-bean-validation</url>
     <connection>scm:git:git@github.com:netceteragroup/valdr-bean-validation.git</connection>
