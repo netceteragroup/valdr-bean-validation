@@ -10,6 +10,12 @@ import java.util.Set;
  */
 public class NullDecorator extends AbstractConstraintAttributesDecorator {
   // CHECKSTYLE:OFF
+
+  /**
+   * Contructor.
+   *
+   * @param decoratee constraint attributes
+   */
   public NullDecorator(ConstraintAttributes decoratee) {
     super(decoratee);
   }

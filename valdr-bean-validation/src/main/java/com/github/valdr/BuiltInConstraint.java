@@ -29,15 +29,45 @@ import lombok.SneakyThrows;
 public enum BuiltInConstraint {
 
   // CHECKSTYLE:OFF
+  /**
+   * Required validation constraint.
+   */
   REQUIRED("required", NotNull.class),
+  /**
+   * Min validation constraint.
+   */
   MIN("min", Min.class),
+  /**
+   * Max validation constraint.
+   */
   MAX("max", Max.class),
+  /**
+   * Size validation constraint.
+   */
   SIZE("size", Size.class),
+  /**
+   * Number validation constraint.
+   */
   DIGITS("digits", Digits.class),
+  /**
+   * Pattern validation constraint.
+   */
   PATTERN("pattern", Pattern.class, PatternDecorator.class),
+  /**
+   * Date/Time in the future validation constraint.
+   */
   FUTURE("future", Future.class),
+  /**
+   * Date/Time in the past validation constraint.
+   */
   PAST("past", Past.class),
+  /**
+   * Email validation constraint.
+   */
   EMAIL("email", Email.class),
+  /**
+   * URL validation constraint.
+   */
   URL("hibernateUrl", org.hibernate.validator.constraints.URL.class);
   // CHECKSTYLE:ON
 

@@ -23,7 +23,7 @@ import java.io.PrintWriter;
  * configured model packages in the classpath are parsed for classes containing supported or
  * custom Bean Validation annotations. The Servlet then builds and returns a JSON document with all validation rules
  * (i.e. Bean Validation constraints). The JSON document adheres to structure specified by valdr.</p>
- *
+ * <p>
  * Servlet can be configured using following {@link jakarta.servlet.ServletConfig} init parameters (* = mandatory):
  * <ul>
  * <li>configFile: path to JSON configuration file, if omitted valdr-bean-validation.json is expected at root of class
@@ -33,10 +33,25 @@ import java.io.PrintWriter;
  * @see Options
  */
 public class ValidationRulesServlet extends HttpServlet {
+  /**
+   * Logger for ValidationRulesServlet.
+   */
   private final Logger logger = LoggerFactory.getLogger(ValidationRulesServlet.class);
+  /**
+   * Indicates that there are not errors in the configuration.
+   */
   private boolean correctlyConfigured = false;
+  /**
+   * CORS allow origin pattern.
+   */
   private String corsAllowOriginPattern;
+  /**
+   * Holds info about reason for the invalid configuration.
+   */
   private String invalidConfigurationMessage;
+  /**
+   * Constraint parser.
+   */
   private ConstraintParser parser;
 
   @Override

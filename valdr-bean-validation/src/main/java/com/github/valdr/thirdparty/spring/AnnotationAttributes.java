@@ -86,41 +86,98 @@ public class AnnotationAttributes extends LinkedHashMap<String, Object> {
     return new AnnotationAttributes(map);
   }
 
+  /**
+   * Gets value of type {@link String} for the given attribute name.
+   *
+   * @param attributeName attribute name
+   * @return value of type {@link String}
+   */
   public String getString(String attributeName) {
     return doGet(attributeName, String.class);
   }
 
+  /**
+   * Gets value of type {@link String} array for the given attribute name.
+   *
+   * @param attributeName attribute name
+   * @return value of type {@link String} array
+   */
   public String[] getStringArray(String attributeName) {
     return doGet(attributeName, String[].class);
   }
 
+  /**
+   * Gets value of type {@link Boolean} for the given attribute name.
+   *
+   * @param attributeName attribute name
+   * @return value of type {@link Boolean}
+   */
   public boolean getBoolean(String attributeName) {
     return doGet(attributeName, Boolean.class);
   }
 
+  /**
+   * Gets value of type {@link Number} for the given attribute name.
+   *
+   * @param attributeName attribute name
+   * @param <N>           type of {@link Number}
+   * @return value of type {@link Number}
+   */
   @SuppressWarnings("unchecked")
   public <N extends Number> N getNumber(String attributeName) {
     return (N) doGet(attributeName, Integer.class);
   }
 
+  /**
+   * Gets value of type {@link Enum} for the given attribute name.
+   *
+   * @param attributeName attribute name
+   * @param <E>           extends Enum
+   * @return value of type {@link Enum}
+   */
   @SuppressWarnings("unchecked")
   public <E extends Enum<?>> E getEnum(String attributeName) {
     return (E) doGet(attributeName, Enum.class);
   }
 
+  /**
+   * Gets value of type {@link Class} for the given attribute name.
+   *
+   * @param attributeName attribute name
+   * @param <T>           class
+   * @return value of type {@link Class}
+   */
   @SuppressWarnings("unchecked")
   public <T> Class<? extends T> getClass(String attributeName) {
     return doGet(attributeName, Class.class);
   }
 
+  /**
+   * Gets value of type {@link Class} array for the given attribute name.
+   *
+   * @param attributeName attribute name
+   * @return value of type {@link Class} array
+   */
   public Class<?>[] getClassArray(String attributeName) {
     return doGet(attributeName, Class[].class);
   }
 
+  /**
+   * Gets value of type {@link AnnotationAttributes} for the given attribute name.
+   *
+   * @param attributeName attribute name
+   * @return value of type {@link AnnotationAttributes}
+   */
   public AnnotationAttributes getAnnotation(String attributeName) {
     return doGet(attributeName, AnnotationAttributes.class);
   }
 
+  /**
+   * Gets value of type {@link AnnotationAttributes} array for the given attribute name.
+   *
+   * @param attributeName attribute name
+   * @return value of type {@link AnnotationAttributes} array
+   */
   public AnnotationAttributes[] getAnnotationArray(String attributeName) {
     return doGet(attributeName, AnnotationAttributes[].class);
   }
