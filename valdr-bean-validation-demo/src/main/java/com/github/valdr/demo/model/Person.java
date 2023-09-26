@@ -7,6 +7,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+/**
+ * Person class used for demo purposes.
+ */
 public class Person {
   @NotNull(message = "\\foo")
   private String firstName;
