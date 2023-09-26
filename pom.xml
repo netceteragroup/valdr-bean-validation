@@ -5,7 +5,7 @@
   <groupId>com.github.valdr</groupId>
   <artifactId>valdr-bean-validation-parent</artifactId>
   <packaging>pom</packaging>
-  <version>2.0.1-SNAPSHOT</version>
+  <version>1.1.4-SNAPSHOT</version>
 
   <name>valdr Bean Validation</name>
   <description>Bean Validation (JSR 303/349) plugin for valdr, the new AngularJS Model Validator.</description>
