@@ -117,7 +117,6 @@ public class AnnotationAttributes extends LinkedHashMap<String, Object> {
   }
 
   /**
-   * /**
    * Gets value of type {@link Number} for the given attribute name.
    *
    * @param attributeName attribute name
@@ -142,7 +141,6 @@ public class AnnotationAttributes extends LinkedHashMap<String, Object> {
   }
 
   /**
-   * /**
    * Gets value of type {@link Class} for the given attribute name.
    *
    * @param attributeName attribute name
