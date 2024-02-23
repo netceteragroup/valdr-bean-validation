@@ -110,7 +110,7 @@
     <reflections.version>0.10.2</reflections.version>
     <servlet-api.version>6.0.0</servlet-api.version>
     <slf4j.version>2.0.9</slf4j.version>
-    <spring.version>6.0.11</spring.version>
+    <spring.version>6.0.17</spring.version>
     <jakarta.persistence-api.version>3.1.0</jakarta.persistence-api.version>
     <jakarta.xml.bind-api.version>4.0.0</jakarta.xml.bind-api.version>
   </properties>
